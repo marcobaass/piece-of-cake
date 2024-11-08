@@ -1,0 +1,19 @@
+.filled {
+  box-sizing: border-box;
+  width: var(--cell-size);
+  height: var(--cell-size);
+  background-color: whitesmoke;
+  border: 1px solid red;
+}
+
+.empty {
+  box-sizing: border-box;
+  width: var(--cell-size);
+  height: var(--cell-size);
+  background-color: transparent;
+}
+
+.shadow {
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+  transform: scale(1.05);
+}

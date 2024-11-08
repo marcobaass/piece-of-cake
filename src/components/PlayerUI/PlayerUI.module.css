@@ -1,0 +1,10 @@
+.playerData {
+  display: flex;
+  justify-content: space-around;
+}
+
+.shapeSelection {
+  display: flex;
+  gap: 2rem;
+  margin: 2rem;
+}
