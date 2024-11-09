@@ -5,6 +5,8 @@ import PropTypes from 'prop-types'
 export default function PlayerUI({
   coins, setCoins, score, setScore, draggingStates, handleStartDragging, handleStopDragging
 }) {
+  console.log(draggingStates);
+  
   return (
     <div>
       <div className={styles.playerData}>

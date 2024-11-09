@@ -5,6 +5,7 @@
 
 .shapeSelection {
   display: flex;
-  gap: 2rem;
-  margin: 2rem;
+  gap: var(--cell-size);
+  margin: var(--cell-size);
+  align-items: flex-end;
 }

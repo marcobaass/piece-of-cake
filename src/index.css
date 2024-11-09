@@ -12,7 +12,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  --cell-size: 3rem;
+  --cell-size: 30px;
 }
 
 a {

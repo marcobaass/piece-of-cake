@@ -14,8 +14,14 @@ export default function ShapeSelection({
   const rndShapeKey = shapeKeys[Math.floor(Math.random() * shapeKeys.length)];
   const rndShape = Shapes[rndShapeKey];
 
+  const cellSize = () => {
+    const cellSizeStr = getComputedStyle(document.documentElement).getPropertyValue('--cell-size').trim();
+    return parseInt(cellSizeStr, 10);
+  }
+
   return (
     <Draggable
+      grid={[cellSize(), cellSize()]}
       onStart={() => handleStartDragging(index)} // Start dragging handler
       onStop={() => handleStopDragging(index)} // Stop dragging handler
     >
