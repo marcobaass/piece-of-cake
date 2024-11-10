@@ -9,13 +9,17 @@ function App() {
   const draggingStates = useRef([false, false, false]);
 
   const handleStartDragging = (index) => {
-    draggingStates.current[index] = true; // Set the dragged shape as true
+    draggingStates.current[index] = true;
+    console.log(draggingStates.current[index]);
   };
 
   // Handler for stopping the drag (for a specific shape index)
   const handleStopDragging = (index) => {
-    draggingStates.current[index] = false; // Reset the dragged shape to false
+    draggingStates.current[index] = false;
+    console.log(draggingStates.current[index]);
   };
+
+
 
   return (
     <div className={styles.app}>

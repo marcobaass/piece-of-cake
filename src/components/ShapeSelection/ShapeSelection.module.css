@@ -6,6 +6,12 @@
   border: 1px solid red;
 }
 
+.filledShadow {
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+  /* width: calc((var(--cell-size))*1.1);
+  height: calc((var(--cell-size))*1.1); */
+}
+
 .empty {
   box-sizing: border-box;
   width: var(--cell-size);

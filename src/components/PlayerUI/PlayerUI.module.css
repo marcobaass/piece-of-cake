@@ -4,8 +4,10 @@
 }
 
 .shapeSelection {
+  width: calc((var(--cell-size)*14));
   display: flex;
   gap: var(--cell-size);
   margin: var(--cell-size);
   align-items: flex-end;
+  justify-content: flex-end;
 }
