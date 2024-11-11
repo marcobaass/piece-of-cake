@@ -1,53 +1,23 @@
 import ShapeSelection from '../ShapeSelection/ShapeSelection'
 import styles from './PlayerUI.module.css'
-import PropTypes, { array } from 'prop-types'
+import PropTypes from 'prop-types'
 import { rotate90Deg, flipHorizontal } from '../../utils/shapeConfig'
 import { useState } from 'react';
 import { Shapes } from '../../utils/shapes';
 
-export default function PlayerUI({
-  coins,
-  score,
-  handleStartDragging,
-  handleStopDragging
+export default function PlayerUI({coins, score, handleStartDragging, handleStopDragging
 }) {
-  console.log(Shapes)
 
-  const shapeForms = Object.keys(Shapes);
-
-  console.log('Shape Letters', shapeForms);
-
-
-  const shuffledShapes = (shapeForms) => {
-    let oldElement;
-    for (let i= shapeForms.length - 1; i > 0; i--) {
-      let rand = Math.floor(Math.random() * (i + 1));
-      oldElement = shapeForms[i];
-      shapeForms[i] = shapeForms[rand];
-      shapeForms[rand] = oldElement;
-    }
-    return shapeForms;
-  }
-
-  const shuffledArray = shuffledShapes([...shapeForms]);
-
-
-  const [shapes, setShapes] = useState([
-    Shapes[shuffledArray[0]],
-    Shapes[shuffledArray[1]],
-    Shapes[shuffledArray[2]]
-  ]);
+  const shapeKeys = Object.keys(Shapes);
+  const [rndShape, setRndShape] = useState(Shapes[shapeKeys[Math.floor(Math.random() * shapeKeys.length)]]);
 
   const handleRotate = () => {
-    const newShapes = shapes.map(shape => rotate90Deg(shape));
-    setShapes(newShapes);
-  };
+    setRndShape(rotate90Deg(rndShape));
+  }
 
   const handleFlip = () => {
-    const newShapes = shapes.map(shape => flipHorizontal(shape));
-    setShapes(newShapes);
-  };
-
+    setRndShape(flipHorizontal(rndShape));
+  }
 
   return (
     <div>
@@ -63,19 +33,22 @@ export default function PlayerUI({
 
       <div className={styles.shapeSelection}>
         <ShapeSelection
-          rndShape={shapes[0]}
+          index={0} // Pass index to identify the shape
+          shape={rndShape}
           handleStartDragging={handleStartDragging}
           handleStopDragging={handleStopDragging}
         />
 
         <ShapeSelection
-          rndShape={shapes[1]}
+          index={1}
+          shape={rndShape}
           handleStartDragging={handleStartDragging}
           handleStopDragging={handleStopDragging}
         />
 
         <ShapeSelection
-          rndShape={shapes[2]}
+          index={2}
+          shape={rndShape}
           handleStartDragging={handleStartDragging}
           handleStopDragging={handleStopDragging}
         />

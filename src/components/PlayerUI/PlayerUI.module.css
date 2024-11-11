@@ -11,3 +11,10 @@
   align-items: flex-end;
   justify-content: flex-end;
 }
+
+.shapeButtons {
+  display: flex;
+  justify-content: center;
+  gap: var(--cell-size);
+  margin-bottom: var(--cell-size);
+}
