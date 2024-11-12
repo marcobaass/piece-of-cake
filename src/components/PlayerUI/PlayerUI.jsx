@@ -1,6 +1,6 @@
 import ShapeSelection from '../ShapeSelection/ShapeSelection'
 import styles from './PlayerUI.module.css'
-import PropTypes, { array } from 'prop-types'
+import PropTypes from 'prop-types'
 import { rotate90Deg, flipHorizontal } from '../../utils/shapeConfig'
 import { useState } from 'react';
 import { Shapes } from '../../utils/shapes';
