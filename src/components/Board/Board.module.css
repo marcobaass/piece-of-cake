@@ -1,5 +1,6 @@
 .wholeBoard {
   display: grid;
+  gap: var(--cell-size);
 }
 
 .board {
@@ -14,6 +15,7 @@
   justify-content: center;
   grid-template-columns: repeat(8, var(--cell-size));
   background-color: hsl(180, 100%, 75%);
+  border-radius: 10px;
 }
 
 
