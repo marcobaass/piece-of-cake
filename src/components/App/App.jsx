@@ -28,11 +28,12 @@ function App() {
         setCoins={setCoins}
         score={score}
         setScore={setScore}
+      />
+      <Board
         draggingStates={draggingStates} // Pass down dragging states
         handleStartDragging={handleStartDragging} // Pass down handleStart function
         handleStopDragging={handleStopDragging} // Pass down handleStop function
       />
-      <Board />
     </div>
   )
 }

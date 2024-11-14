@@ -1,7 +1,13 @@
 import { useState, useEffect } from 'react';
 import styles from './Board.module.css';
+import ShapeSelection from '../ShapeSelection/ShapeSelection'
+import { Shapes } from '../../utils/shapes';
+import { rotate90Deg, flipHorizontal } from '../../utils/shapeConfig'
 
-export default function Board() {
+export default function Board({
+  handleStartDragging,
+  handleStopDragging
+}) {
   // 1. State for 8x8 grid
   const [boardState, setBoardState] = useState([]);
   const [offBoardState, setOffBoardState] = useState([]);
@@ -58,6 +64,43 @@ export default function Board() {
     }
   }
 
+  console.log(Shapes)
+
+  const shapeForms = Object.keys(Shapes);
+
+  console.log('Shape Letters', shapeForms);
+
+
+  const shuffledShapes = (shapeForms) => {
+    let oldElement;
+    for (let i= shapeForms.length - 1; i > 0; i--) {
+      let rand = Math.floor(Math.random() * (i + 1));
+      oldElement = shapeForms[i];
+      shapeForms[i] = shapeForms[rand];
+      shapeForms[rand] = oldElement;
+    }
+    return shapeForms;
+  }
+
+  const shuffledArray = shuffledShapes([...shapeForms]);
+
+
+  const [shapes, setShapes] = useState([
+    Shapes[shuffledArray[0]],
+    Shapes[shuffledArray[1]],
+    Shapes[shuffledArray[2]]
+  ]);
+
+  const handleRotate = () => {
+    const newShapes = shapes.map(shape => rotate90Deg(shape));
+    setShapes(newShapes);
+  };
+
+  const handleFlip = () => {
+    const newShapes = shapes.map(shape => flipHorizontal(shape));
+    setShapes(newShapes);
+  };
+
   // 5. Render the board as an 8x8 grid of cells
   return (
     <div className={styles.wholeBoard}>
@@ -89,6 +132,31 @@ export default function Board() {
             ))}
           </div>
         ))}
+      </div>
+
+      <div className={styles.shapeButtons}>
+        <button onClick={handleRotate}>Rotate</button>
+        <button onClick={handleFlip}>Flip</button>
+      </div>
+
+      <div className={styles.shapeSelection}>
+        <ShapeSelection
+          rndShape={shapes[0]}
+          handleStartDragging={handleStartDragging}
+          handleStopDragging={handleStopDragging}
+        />
+
+        <ShapeSelection
+          rndShape={shapes[1]}
+          handleStartDragging={handleStartDragging}
+          handleStopDragging={handleStopDragging}
+        />
+
+        <ShapeSelection
+          rndShape={shapes[2]}
+          handleStartDragging={handleStartDragging}
+          handleStopDragging={handleStopDragging}
+        />
       </div>
 
     </div>
