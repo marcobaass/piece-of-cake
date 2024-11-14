@@ -3,6 +3,7 @@ import styles from './Board.module.css';
 import ShapeSelection from '../ShapeSelection/ShapeSelection'
 import { Shapes } from '../../utils/shapes';
 import { rotate90Deg, flipHorizontal } from '../../utils/shapeConfig'
+import PropTypes from 'prop-types';
 
 export default function Board({
   handleStartDragging,
@@ -152,13 +153,18 @@ export default function Board({
           handleStopDragging={handleStopDragging}
         />
 
-        <ShapeSelection
+        {/* <ShapeSelection
           rndShape={shapes[2]}
           handleStartDragging={handleStartDragging}
           handleStopDragging={handleStopDragging}
-        />
+        /> */}
       </div>
 
     </div>
   );
+}
+
+Board.propTypes = {
+  handleStartDragging: PropTypes.func.isRequired,
+  handleStopDragging: PropTypes.func.isRequired
 }
