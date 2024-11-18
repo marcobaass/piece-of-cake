@@ -10,13 +10,11 @@ function App() {
 
   const handleStartDragging = (index) => {
     draggingStates.current[index] = true;
-    console.log(draggingStates.current[index]);
   };
 
   // Handler for stopping the drag (for a specific shape index)
   const handleStopDragging = (index) => {
     draggingStates.current[index] = false;
-    console.log(draggingStates.current[index]);
   };
 
 

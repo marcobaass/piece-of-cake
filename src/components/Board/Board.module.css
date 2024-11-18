@@ -1,24 +1,33 @@
-.wholeBoard {
-  position: relative;
-  display: grid;
-  gap: var(--cell-size);
+.boardContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Zentriert das Board und die Shapes */
 }
 
 .board {
   display: grid;
   justify-content: center;
+  grid-template-rows: repeat(8, var(--cell-size));
   grid-template-columns: repeat(8, var(--cell-size));
   background-color: hsl(0, 59%, 21%);
 }
 
-.offBoard {
-  display: grid;
-  justify-content: center;
-  grid-template-columns: repeat(8, var(--cell-size));
-  background-color: hsl(180, 100%, 75%);
-  border-radius: 10px;
+.shapeSelection {
+  position: relative;
+  max-width: calc(var(--cell-size) * 8);
+  display: flex;
+  gap: var(--cell-size);
+  flex-wrap: wrap;
+  margin-top: calc(var(--cell-size) * 1); /* Zwischenraum für Shapes */
+  margin-bottom: calc(var(--cell-size) * 2); /* Platz unter den Shapes */
 }
 
+.shapeButtons {
+  margin-top: 0; /* Platz für den Button-Bereich */
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
 
 .cell {
   box-sizing: border-box;
@@ -28,24 +37,4 @@
   align-items: center;
   width: var(--cell-size);
   height: var(--cell-size);
-}
-
-.offCell {
-  box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: var(--cell-size);
-  height: var(--cell-size);
-}
-
-.shapeSelection {
-  position: absolute;
-  max-width: calc((var(--cell-size)*8));
-  display: flex;
-  gap: var(--cell-size);
-  flex-wrap: wrap;
-  margin-top: calc((var(--cell-size)*10));
-  margin-left: calc((var(--cell-size)*1));
-  margin-right: calc((var(--cell-size)*1));
 }
