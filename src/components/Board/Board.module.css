@@ -1,25 +1,26 @@
 .boardContainer {
+  position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Zentriert das Board und die Shapes */
+  /* align-items: center; Zentriert das Board und die Shapes */
 }
 
 .board {
   display: grid;
   justify-content: center;
-  grid-template-rows: repeat(8, var(--cell-size));
+  grid-template-rows: repeat(13, var(--cell-size));
   grid-template-columns: repeat(8, var(--cell-size));
-  background-color: hsl(0, 59%, 21%);
 }
 
 .shapeSelection {
-  position: relative;
+  position: absolute;
   max-width: calc(var(--cell-size) * 8);
   display: flex;
   gap: var(--cell-size);
   flex-wrap: wrap;
-  margin-top: calc(var(--cell-size) * 1); /* Zwischenraum für Shapes */
+  margin-top: calc(var(--cell-size) * 9); /* Zwischenraum für Shapes */
   margin-bottom: calc(var(--cell-size) * 2); /* Platz unter den Shapes */
+  justify-content: flex-start;
 }
 
 .shapeButtons {
@@ -29,10 +30,21 @@
   gap: 10px;
 }
 
-.cell {
+.boardCell {
   box-sizing: border-box;
   display: flex;
   border: 1px solid red;
+  justify-content: center;
+  align-items: center;
+  width: var(--cell-size);
+  height: var(--cell-size);
+  background-color: hsl(0, 59%, 21%);
+}
+
+.offCell {
+  box-sizing: border-box;
+  display: flex;
+  border: 1px solid rgb(255, 251, 0);
   justify-content: center;
   align-items: center;
   width: var(--cell-size);

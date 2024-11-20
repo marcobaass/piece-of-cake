@@ -77,8 +77,8 @@ export default function Board({
 
   const [shapes, setShapes] = useState([
     Shapes[shuffledArray[0]],
-    Shapes[shuffledArray[1]],
-    Shapes[shuffledArray[2]]
+    // Shapes[shuffledArray[1]],
+    // Shapes[shuffledArray[2]]
   ]);
 
   const handleRotate = () => {
@@ -94,24 +94,24 @@ export default function Board({
   // 5. Render the board as an 8x8 grid of cells
   return (
     <div>
+
       <div className={styles.boardContainer}>
+
         <div className={styles.board}>
           {/* Rendern des Boards */}
-          {boardState.map((row, rowIndex) => (
-            <div key={rowIndex} className={styles.boardRow}>
-              {row.map((cell, colIndex) => (
-                <div
-                  key={`${rowIndex}-${colIndex}`}
-                  className={`${styles.cell} ${styles[cell.type]}`}
-                  id={cell.id} // Jede Zelle hat nun eine eindeutige ID
-                  style={rowIndex < 8 ? {} : { visibility: 'hidden' }} // Unsichtbar für OffBoard-Zellen
-                >
-                  {/* Zeige das Item innerhalb der Zelle an */}
-                  {cell.type === 'object' ? '📦' : cell.type === 'coin' ? '💰' : ''}
-                </div>
-              ))}
-            </div>
-          ))}
+          {console.log('BOARDSTATE', boardState)}
+          {boardState.map((row, rowIndex) =>
+            row.map((cell, colIndex) => ( // Fixed variable name (was `col`, should be `cell`)
+              <div
+                key={`${rowIndex}-${colIndex}`}
+                className={`${rowIndex < 8 ? styles.boardCell : styles.offCell} ${styles[cell.type]}`}
+                id={cell.id} // Jede Zelle hat nun eine eindeutige ID
+              >
+                {/* Zeige das Item innerhalb der Zelle an */}
+                {cell.type === 'object' ? '📦' : cell.type === 'coin' ? '💰' : ''}
+              </div>
+            ))
+          )}
         </div>
 
         {/* ShapeSelection für die draggable Teile im OffBoard-Bereich */}
@@ -125,6 +125,7 @@ export default function Board({
             />
           ))}
         </div>
+
       </div>
 
       <div className={styles.shapeButtons}>
