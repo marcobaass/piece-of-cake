@@ -95,7 +95,7 @@ export default function Board({
   return (
     <div>
 
-      <div className={styles.boardContainer}>
+      <section className={styles.boardContainer}>
 
         <div className={styles.board}>
           {/* Rendern des Boards */}
@@ -126,7 +126,7 @@ export default function Board({
           ))}
         </div>
 
-      </div>
+      </section>
 
       <div className={styles.shapeButtons}>
         <button onClick={handleRotate}>Rotate</button>

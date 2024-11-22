@@ -18,8 +18,7 @@
   display: flex;
   gap: var(--cell-size);
   flex-wrap: wrap;
-  margin-top: calc(var(--cell-size) * 9); /* Zwischenraum für Shapes */
-  margin-bottom: calc(var(--cell-size) * 2); /* Platz unter den Shapes */
+  /* margin-top: calc(var(--cell-size) * 9); */
   justify-content: flex-start;
 }
 

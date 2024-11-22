@@ -1,13 +1,17 @@
 import Draggable from 'react-draggable';
 import styles from './ShapeSelection.module.css';
 import PropTypes from 'prop-types';
-import React from'react';
+import React, { useState } from 'react';
 
 export default function ShapeSelection({
   handleStartDragging,
   handleStopDragging,
   rndShape
 }) {
+  const [cellX, setCellX] = useState(0);
+  const [cellY, setCellY] = useState(0);
+
+
   const nodeRef = React.useRef(null);
 
   const cellSize = () => {
@@ -19,13 +23,28 @@ export default function ShapeSelection({
     <Draggable
       nodeRef={nodeRef}
       grid={[cellSize(), cellSize()]}
+      bounds="section"
+      defaultPosition={{x: cellSize(), y: cellSize()*9}}
+      onDrag={(e, data) => {
+        const x = Math.floor(data.x / cellSize());
+        const y = Math.floor(data.y / cellSize());
+        console.log(`Grid Position: x=${x}, y=${y}`); // Directly log the calculated grid position
+      }}
+
       onStart={() => {
         handleStartDragging();
         nodeRef.current.querySelectorAll(`.${styles.filled}`).forEach(cell => {
           cell.classList.add(styles.filledShadow);
         });
       }}
-      onStop={() => {
+
+      onStop={(e, data) => {
+        const x = Math.floor(data.x / cellSize());
+        const y = Math.floor(data.y / cellSize());
+        console.log(`Final Grid Position: x=${x}, y=${y}`);
+        setCellX(x); // Update state only on stop
+        setCellY(y);
+
         handleStopDragging();
         nodeRef.current.querySelectorAll(`.${styles.filled}`).forEach(cell => {
           cell.classList.remove(styles.filledShadow);
