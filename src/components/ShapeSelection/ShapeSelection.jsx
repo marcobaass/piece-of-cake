@@ -1,15 +1,16 @@
 import Draggable from 'react-draggable';
 import styles from './ShapeSelection.module.css';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React from 'react';
 
 export default function ShapeSelection({
   handleStartDragging,
   handleStopDragging,
-  rndShape
+  rndShape,
+  setCellX,
+  setCellY,
+  boardState
 }) {
-  const [cellX, setCellX] = useState(0);
-  const [cellY, setCellY] = useState(0);
 
 
   const nodeRef = React.useRef(null);
@@ -44,8 +45,8 @@ export default function ShapeSelection({
         console.log(`Final Grid Position: x=${x}, y=${y}`);
         setCellX(x); // Update state only on stop
         setCellY(y);
-
-        handleStopDragging();
+        console.log('Shape Array:', rndShape)
+        handleStopDragging(x, y, rndShape, boardState);
         nodeRef.current.querySelectorAll(`.${styles.filled}`).forEach(cell => {
           cell.classList.remove(styles.filledShadow);
         });
@@ -70,5 +71,10 @@ ShapeSelection.propTypes = {
   rndShape: PropTypes.array.isRequired,
   handleStartDragging: PropTypes.func.isRequired,
   handleStopDragging: PropTypes.func.isRequired,
-  index: PropTypes.number.isRequired
+  index: PropTypes.number.isRequired,
+  cellX: PropTypes.number,
+  setCellX: PropTypes.func,
+  cellY: PropTypes.number,
+  setCellY: PropTypes.func,
+  boardState: PropTypes.array.isRequired
 }

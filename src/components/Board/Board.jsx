@@ -7,7 +7,11 @@ import PropTypes from 'prop-types';
 
 export default function Board({
   handleStartDragging,
-  handleStopDragging
+  handleStopDragging,
+  cellX,
+  cellY,
+  setCellX,
+  setCellY
 }) {
   const [boardState, setBoardState] = useState([]);
 
@@ -122,6 +126,11 @@ export default function Board({
               rndShape={shape}
               handleStartDragging={handleStartDragging}
               handleStopDragging={handleStopDragging}
+              cellX={cellX} // Pass down cellX state
+              setCellX={setCellX} // Pass down cellX state
+              cellY={cellY} // Pass down cellY state
+              setCellY={setCellY} // Pass down cellY state
+              boardState={boardState} // Pass down boardState
             />
           ))}
         </div>
@@ -139,5 +148,9 @@ export default function Board({
 
 Board.propTypes = {
   handleStartDragging: PropTypes.func.isRequired,
-  handleStopDragging: PropTypes.func.isRequired
+  handleStopDragging: PropTypes.func.isRequired,
+  cellX: PropTypes.number,
+  setCellX: PropTypes.func,
+  cellY: PropTypes.number,
+  setCellY: PropTypes.func
 }
