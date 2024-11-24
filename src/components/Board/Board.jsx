@@ -1,25 +1,24 @@
 import { useState, useEffect } from 'react';
 import styles from './Board.module.css';
-import ShapeSelection from '../ShapeSelection/ShapeSelection'
-import { Shapes } from '../../utils/shapes';
-import { rotate90Deg, flipHorizontal } from '../../utils/shapeConfig'
+import ShapeSelection from '../ShapeSelection/ShapeSelection';
 import PropTypes from 'prop-types';
 
 export default function Board({
   handleStartDragging,
   handleStopDragging,
+  handleFlip,
+  handleRotate,
   cellX,
   cellY,
   setCellX,
-  setCellY
+  setCellY,
+  shapes
 }) {
   const [boardState, setBoardState] = useState([]);
 
   // 2. Initialize board
   useEffect(() => {
     const initialBoard = createFullGrid();
-    console.log("Board-IDs", initialBoard);
-
     placeItems(initialBoard, 'coin', 8);   // Place 8 coins
     placeItems(initialBoard, 'object', 6);// Place 6 objects
     setBoardState(initialBoard);
@@ -62,38 +61,6 @@ export default function Board({
     }
   };
 
-  const shapeForms = Object.keys(Shapes);
-
-
-  const shuffledShapes = (shapeForms) => {
-    let oldElement;
-    for (let i= shapeForms.length - 1; i > 0; i--) {
-      let rand = Math.floor(Math.random() * (i + 1));
-      oldElement = shapeForms[i];
-      shapeForms[i] = shapeForms[rand];
-      shapeForms[rand] = oldElement;
-    }
-    return shapeForms;
-  }
-
-  const shuffledArray = shuffledShapes([...shapeForms]);
-
-
-  const [shapes, setShapes] = useState([
-    Shapes[shuffledArray[0]],
-    // Shapes[shuffledArray[1]],
-    // Shapes[shuffledArray[2]]
-  ]);
-
-  const handleRotate = () => {
-    const newShapes = shapes.map(shape => rotate90Deg(shape));
-    setShapes(newShapes);
-  };
-
-  const handleFlip = () => {
-    const newShapes = shapes.map(shape => flipHorizontal(shape));
-    setShapes(newShapes);
-  };
 
   // 5. Render the board as an 8x8 grid of cells
   return (
@@ -103,7 +70,6 @@ export default function Board({
 
         <div className={styles.board}>
           {/* Rendern des Boards */}
-          {console.log('BOARDSTATE', boardState)}
           {boardState.map((row, rowIndex) =>
             row.map((cell, colIndex) => ( // Fixed variable name (was `col`, should be `cell`)
               <div
@@ -152,5 +118,8 @@ Board.propTypes = {
   cellX: PropTypes.number,
   setCellX: PropTypes.func,
   cellY: PropTypes.number,
-  setCellY: PropTypes.func
+  setCellY: PropTypes.func,
+  handleFlip: PropTypes.func.isRequired,
+  handleRotate: PropTypes.func.isRequired,
+  shapes: PropTypes.array.isRequired
 }

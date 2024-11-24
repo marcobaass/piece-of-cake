@@ -3,6 +3,8 @@ import styles from './App.module.css'
 import Board from '../Board/Board.jsx';
 import PlayerUI from '../PlayerUI/PlayerUI';
 import { validatePlacement } from '../../utils/validatePlacement.js';
+import { rotate90Deg, flipHorizontal } from '../../utils/shapeConfig';
+import { Shapes } from '../../utils/shapes';
 
 function App() {
   const [coins, setCoins] = useState(0);
@@ -10,6 +12,27 @@ function App() {
   const draggingStates = useRef([false, false, false]);
   const [cellX, setCellX] = useState(0);
   const [cellY, setCellY] = useState(0);
+
+  const shapeForms = Object.keys(Shapes);
+
+  const shuffledShapes = (shapeForms) => {
+    let oldElement;
+    for (let i= shapeForms.length - 1; i > 0; i--) {
+      let rand = Math.floor(Math.random() * (i + 1));
+      oldElement = shapeForms[i];
+      shapeForms[i] = shapeForms[rand];
+      shapeForms[rand] = oldElement;
+    }
+    return shapeForms;
+  }
+
+  const shuffledArray = shuffledShapes([...shapeForms]);
+
+  const [shapes, setShapes] = useState([
+    Shapes[shuffledArray[0]],
+    // Shapes[shuffledArray[1]],
+    // Shapes[shuffledArray[2]]
+  ]);
 
   const handleStartDragging = (index) => {
     draggingStates.current[index] = true;
@@ -19,6 +42,17 @@ function App() {
   const handleStopDragging = (x, y, rndShape, boardState, index) => {
     draggingStates.current[index] = false;
     validatePlacement(x, y, rndShape, boardState);
+  };
+
+  const handleRotate = (x, y, rndShape, boardState) => {
+    const newShapes = shapes.map(shape => rotate90Deg(shape));
+    setShapes(newShapes);
+    validatePlacement(x, y, newShapes[0], boardState);
+  };
+
+  const handleFlip = () => {
+    const newShapes = shapes.map(shape => flipHorizontal(shape));
+    setShapes(newShapes);
   };
 
 
@@ -39,6 +73,9 @@ function App() {
         setCellX={setCellX} // Pass down cellX state
         cellY={cellY} // Pass down cellY state
         setCellY={setCellY} // Pass down cellY state
+        handleFlip={handleFlip}
+        handleRotate={handleRotate}
+        shapes={shapes} // Pass down shapes state
       />
     </div>
   )
