@@ -22,6 +22,5 @@ PlayerUI.propTypes = {
   coins: PropTypes.number.isRequired,
   setCoins: PropTypes.func.isRequired,
   score: PropTypes.number.isRequired,
-  setScore: PropTypes.func.isRequired,
-  draggingStates: PropTypes.object.isRequired
+  setScore: PropTypes.func.isRequired
 }

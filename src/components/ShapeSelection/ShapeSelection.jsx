@@ -6,7 +6,7 @@ import React from 'react';
 export default function ShapeSelection({
   handleStartDragging,
   handleStopDragging,
-  rndShape,
+  shapeGrid,
   setCellX,
   setCellY,
   boardState
@@ -45,15 +45,15 @@ export default function ShapeSelection({
         console.log(`Final Grid Position: x=${x}, y=${y}`);
         setCellX(x); // Update state only on stop
         setCellY(y);
-        console.log('Shape Array:', rndShape)
-        handleStopDragging(x, y, rndShape, boardState);
+        console.log('Shape Array:', shapeGrid)
+        handleStopDragging(x, y, shapeGrid, boardState);
         nodeRef.current.querySelectorAll(`.${styles.filled}`).forEach(cell => {
           cell.classList.remove(styles.filledShadow);
         });
       }}
     >
       <div ref={nodeRef}>
-        {rndShape.map((row, rowIndex) => (
+        {shapeGrid.map((row, rowIndex) => (
           <div key={rowIndex} style={{ display: 'flex' }}>
             {row.map((cell, colIndex) => (
               <span key={colIndex}>
@@ -68,13 +68,10 @@ export default function ShapeSelection({
 }
 
 ShapeSelection.propTypes = {
-  rndShape: PropTypes.array.isRequired,
+  shapeGrid: PropTypes.array.isRequired, // Renamed from rndShape
   handleStartDragging: PropTypes.func.isRequired,
   handleStopDragging: PropTypes.func.isRequired,
-  index: PropTypes.number.isRequired,
-  cellX: PropTypes.number,
-  setCellX: PropTypes.func,
-  cellY: PropTypes.number,
-  setCellY: PropTypes.func,
+  setCellX: PropTypes.func.isRequired,
+  setCellY: PropTypes.func.isRequired,
   boardState: PropTypes.array.isRequired
 }

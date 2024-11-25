@@ -1,8 +1,10 @@
-export function validatePlacement(colShape, rowShape, rndShape, boardState) {
+export function validatePlacement(colShape, rowShape, shapeGrid, boardState) {
   console.log('Zellen:', rowShape, colShape)
-  console.log('Tetristeil:', rndShape)
+  console.log('Tetristeil:', shapeGrid)
+  console.log('Board:', boardState);
+  
 
-  rndShape.forEach(row => {
+  shapeGrid.forEach(row => {
     row.forEach(cell => {
       let cellType = boardState[rowShape][colShape].type;
       console.log('#', cellType, rowShape, colShape);
@@ -18,10 +20,10 @@ export function validatePlacement(colShape, rowShape, rndShape, boardState) {
       colShape++;
     });
     rowShape ++;
-    colShape = colShape - rndShape[0].length;
+    colShape = colShape - shapeGrid[0].length;
   });
 
-  // mit forEach durch rndShape iterrieren
+  // mit forEach durch shapeGrid iterrieren
   // check ob cellType === Object >>> Tetristeil zurück auf Start
   // check ob cellType === cake >>> Tetristeil zurück auf Start
     // check ob cellType === Coin >>> coinswert erhöhen (temporär wegen bestätigen?)

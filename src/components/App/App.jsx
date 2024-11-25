@@ -9,50 +9,38 @@ import { Shapes } from '../../utils/shapes';
 function App() {
   const [coins, setCoins] = useState(0);
   const [score, setScore] = useState(0);
-  const draggingStates = useRef([false, false, false]);
+  const draggingStates = useRef(false);
   const [cellX, setCellX] = useState(0);
   const [cellY, setCellY] = useState(0);
 
   const shapeForms = Object.keys(Shapes);
+  const rndShape = Math.floor(Math.random() * shapeForms.length);
+  const shapeKey = shapeForms[rndShape];
+  const [shape, setShape] = useState(Shapes[shapeKey]);
+  console.log(shape);
 
-  const shuffledShapes = (shapeForms) => {
-    let oldElement;
-    for (let i= shapeForms.length - 1; i > 0; i--) {
-      let rand = Math.floor(Math.random() * (i + 1));
-      oldElement = shapeForms[i];
-      shapeForms[i] = shapeForms[rand];
-      shapeForms[rand] = oldElement;
-    }
-    return shapeForms;
-  }
-
-  const shuffledArray = shuffledShapes([...shapeForms]);
-
-  const [shapes, setShapes] = useState([
-    Shapes[shuffledArray[0]],
-    // Shapes[shuffledArray[1]],
-    // Shapes[shuffledArray[2]]
-  ]);
-
-  const handleStartDragging = (index) => {
-    draggingStates.current[index] = true;
+  const handleStartDragging = () => {
+    draggingStates.current = true;
   };
 
   // Handler for stopping the drag (for a specific shape index)
-  const handleStopDragging = (x, y, rndShape, boardState, index) => {
-    draggingStates.current[index] = false;
+  const handleStopDragging = (x, y, rndShape, boardState) => {
+    draggingStates.current = false;
     validatePlacement(x, y, rndShape, boardState);
   };
 
-  const handleRotate = (x, y, rndShape, boardState) => {
-    const newShapes = shapes.map(shape => rotate90Deg(shape));
-    setShapes(newShapes);
-    validatePlacement(x, y, newShapes[0], boardState);
+  const handleRotate = (boardState) => {
+    const rotatedShape = rotate90Deg(shape);
+    setShape(rotatedShape);
+    console.log('Board in handleRotate', boardState);
+
+    validatePlacement(cellX, cellY, rotatedShape, boardState);
   };
 
-  const handleFlip = () => {
-    const newShapes = shapes.map(shape => flipHorizontal(shape));
-    setShapes(newShapes);
+  const handleFlip = (boardState) => {
+    const flippedShape = flipHorizontal(shape);
+    setShape(flippedShape);
+    validatePlacement(cellX, cellY, flippedShape, boardState);
   };
 
 
@@ -75,7 +63,7 @@ function App() {
         setCellY={setCellY} // Pass down cellY state
         handleFlip={handleFlip}
         handleRotate={handleRotate}
-        shapes={shapes} // Pass down shapes state
+        shape={shape} // Pass down shapes state
       />
     </div>
   )

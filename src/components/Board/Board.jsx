@@ -12,7 +12,7 @@ export default function Board({
   cellY,
   setCellX,
   setCellY,
-  shapes
+  shape
 }) {
   const [boardState, setBoardState] = useState([]);
 
@@ -86,10 +86,8 @@ export default function Board({
 
         {/* ShapeSelection für die draggable Teile im OffBoard-Bereich */}
         <div className={styles.shapeSelection}>
-          {shapes.map((shape, index) => (
             <ShapeSelection
-              key={index}
-              rndShape={shape}
+              shapeGrid={shape}
               handleStartDragging={handleStartDragging}
               handleStopDragging={handleStopDragging}
               cellX={cellX} // Pass down cellX state
@@ -98,14 +96,14 @@ export default function Board({
               setCellY={setCellY} // Pass down cellY state
               boardState={boardState} // Pass down boardState
             />
-          ))}
+
         </div>
 
       </section>
 
       <div className={styles.shapeButtons}>
-        <button onClick={handleRotate}>Rotate</button>
-        <button onClick={handleFlip}>Flip</button>
+        <button onClick={() => handleRotate(boardState)}>Rotate</button>
+        <button onClick={() => handleFlip(boardState)}>Flip</button>
       </div>
 
     </div>
@@ -121,5 +119,5 @@ Board.propTypes = {
   setCellY: PropTypes.func,
   handleFlip: PropTypes.func.isRequired,
   handleRotate: PropTypes.func.isRequired,
-  shapes: PropTypes.array.isRequired
+  shape: PropTypes.array.isRequired
 }
