@@ -121,5 +121,6 @@ Board.propTypes = {
   setCellY: PropTypes.func,
   handleFlip: PropTypes.func.isRequired,
   handleRotate: PropTypes.func.isRequired,
-  shape: PropTypes.array.isRequired
+  shape: PropTypes.array.isRequired,
+  isValid: PropTypes.bool.isRequired
 }

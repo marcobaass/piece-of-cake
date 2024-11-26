@@ -1,7 +1,7 @@
 import Draggable from 'react-draggable';
 import styles from './ShapeSelection.module.css';
 import PropTypes from 'prop-types';
-import React, { isValidElement } from 'react';
+import React from 'react';
 
 export default function ShapeSelection({
   handleStartDragging,
@@ -9,7 +9,8 @@ export default function ShapeSelection({
   shapeGrid,
   setCellX,
   setCellY,
-  boardState
+  boardState,
+  isValid
 }) {
 
 
@@ -53,15 +54,26 @@ export default function ShapeSelection({
       }}
     >
       <div ref={nodeRef}>
-        {shapeGrid.map((row, rowIndex) => (
-          <div key={rowIndex} style={{ display: 'flex' }}>
-            {row.map((cell, colIndex) => (
-              <span key={colIndex}>
-                {cell === 1 ? <div className={styles.filled}></div> : <div className={styles.empty}></div>}
-              </span>
-            ))}
-          </div>
-        ))}
+        <div>
+          {shapeGrid.map((row, rowIndex) => (
+            <div key={rowIndex} style={{ display: 'flex' }}>
+              {row.map((cell, colIndex) => (
+                <span key={colIndex}>
+                  {cell === 1 ? <div className={styles.filled}></div> : <div className={styles.empty}></div>}
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
+
+        <div>
+          {isValid.current ? (
+            <button className={styles.valid} onMouseDown={(e) => e.stopPropagation()}>✔</button>
+          ) : (
+            <button className={styles.invalid} onMouseDown={(e) => e.stopPropagation()}>❌</button>
+          )}
+        </div>
+
       </div>
     </Draggable>
   );
@@ -73,5 +85,6 @@ ShapeSelection.propTypes = {
   handleStopDragging: PropTypes.func.isRequired,
   setCellX: PropTypes.func.isRequired,
   setCellY: PropTypes.func.isRequired,
-  boardState: PropTypes.array.isRequired
+  boardState: PropTypes.array.isRequired,
+  isValid: PropTypes.object.isRequired,
 }
