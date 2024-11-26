@@ -12,7 +12,8 @@ export default function Board({
   cellY,
   setCellX,
   setCellY,
-  shape
+  shape,
+  isValid
 }) {
   const [boardState, setBoardState] = useState([]);
 
@@ -95,6 +96,7 @@ export default function Board({
               cellY={cellY} // Pass down cellY state
               setCellY={setCellY} // Pass down cellY state
               boardState={boardState} // Pass down boardState
+              isValid={isValid} // Pass down isValid state
             />
 
         </div>

@@ -1,7 +1,7 @@
 import Draggable from 'react-draggable';
 import styles from './ShapeSelection.module.css';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { isValidElement } from 'react';
 
 export default function ShapeSelection({
   handleStartDragging,

@@ -12,6 +12,7 @@ function App() {
   const draggingStates = useRef(false);
   const [cellX, setCellX] = useState(0);
   const [cellY, setCellY] = useState(0);
+  const isValid = useRef(false);
 
   const shapeForms = Object.keys(Shapes);
   const rndShape = Math.floor(Math.random() * shapeForms.length);
@@ -26,21 +27,32 @@ function App() {
   // Handler for stopping the drag (for a specific shape index)
   const handleStopDragging = (x, y, rndShape, boardState) => {
     draggingStates.current = false;
-    validatePlacement(x, y, rndShape, boardState);
+    const { check, collectedCoins } = validatePlacement(x, y, rndShape, boardState);
+    isValid.current = check;
+    setCoins(coins + collectedCoins); // temporary - must apply only when confirmed!!!
+    console.log(isValid.current);
+    console.log(coins);
   };
 
   const handleRotate = (boardState) => {
     const rotatedShape = rotate90Deg(shape);
     setShape(rotatedShape);
     console.log('Board in handleRotate', boardState);
-
-    validatePlacement(cellX, cellY, rotatedShape, boardState);
+    const { check, collectedCoins } = validatePlacement(cellX, cellY, rotatedShape, boardState);
+    isValid.current = check;
+    setCoins(coins + collectedCoins); // temporary - must apply only when confirmed!!!
+    console.log(isValid.current);
+    console.log(coins);
   };
 
   const handleFlip = (boardState) => {
     const flippedShape = flipHorizontal(shape);
     setShape(flippedShape);
-    validatePlacement(cellX, cellY, flippedShape, boardState);
+    const { check, collectedCoins } = validatePlacement(cellX, cellY, flippedShape, boardState);
+    isValid.current = check;
+    setCoins(coins + collectedCoins); // temporary - must apply only when confirmed!!!
+    console.log(isValid.current);
+    console.log(coins);
   };
 
 
@@ -64,6 +76,7 @@ function App() {
         handleFlip={handleFlip}
         handleRotate={handleRotate}
         shape={shape} // Pass down shapes state
+        isValid={isValid}
       />
     </div>
   )

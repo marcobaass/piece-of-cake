@@ -10,6 +10,7 @@
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
   /* width: calc((var(--cell-size))*1.1);
   height: calc((var(--cell-size))*1.1); */
+  opacity: 0.75;
 }
 
 .empty {
@@ -22,4 +23,14 @@
 .shadow {
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
   transform: scale(1.05);
+}
+
+.valid {
+  color: green;
+  padding: 2px 4px;
+}
+
+.invalid {
+  color: red;
+  padding: 2px 4px;
 }
