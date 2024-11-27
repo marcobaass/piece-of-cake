@@ -7,10 +7,11 @@ export default function ShapeSelection({
   handleStartDragging,
   handleStopDragging,
   shapeGrid,
-  setCellX,
-  setCellY,
   boardState,
-  isValid
+  isValid,
+  handleConfirmPlacement,
+  dragCoordinatesRef,
+  setCells
 }) {
 
 
@@ -44,9 +45,9 @@ export default function ShapeSelection({
         const x = Math.floor(data.x / cellSize());
         const y = Math.floor(data.y / cellSize());
         console.log(`Final Grid Position: x=${x}, y=${y}`);
-        setCellX(x); // Update state only on stop
-        setCellY(y);
+        dragCoordinatesRef.current = { x, y };
         console.log('Shape Array:', shapeGrid)
+        setCells({x, y});
         handleStopDragging(x, y, shapeGrid, boardState);
         nodeRef.current.querySelectorAll(`.${styles.filled}`).forEach(cell => {
           cell.classList.remove(styles.filledShadow);
@@ -66,11 +67,23 @@ export default function ShapeSelection({
           ))}
         </div>
 
+        {console.log("isValid.current before rendering:", isValid.current)}
+
         <div>
-          {isValid.current ? (
-            <button className={styles.valid} onMouseDown={(e) => e.stopPropagation()}>✔</button>
+          { isValid.current ? (
+            <button
+              className={styles.valid}
+
+              onClick={() => handleConfirmPlacement(
+                dragCoordinatesRef.current.x,
+                dragCoordinatesRef.current.y,
+                shapeGrid,
+                boardState
+              )}>
+              ✔
+              </button>
           ) : (
-            <button className={styles.invalid} onMouseDown={(e) => e.stopPropagation()}>❌</button>
+            <div className={styles.invalid}>❌</div>
           )}
         </div>
 
@@ -83,8 +96,9 @@ ShapeSelection.propTypes = {
   shapeGrid: PropTypes.array.isRequired, // Renamed from rndShape
   handleStartDragging: PropTypes.func.isRequired,
   handleStopDragging: PropTypes.func.isRequired,
-  setCellX: PropTypes.func.isRequired,
-  setCellY: PropTypes.func.isRequired,
   boardState: PropTypes.array.isRequired,
   isValid: PropTypes.object.isRequired,
+  handleConfirmPlacement: PropTypes.func.isRequired,
+  dragCoordinatesRef: PropTypes.object.isRequired,
+  setCells: PropTypes.func.isRequired
 }

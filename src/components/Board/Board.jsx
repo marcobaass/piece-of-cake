@@ -8,12 +8,11 @@ export default function Board({
   handleStopDragging,
   handleFlip,
   handleRotate,
-  cellX,
-  cellY,
-  setCellX,
-  setCellY,
   shape,
-  isValid
+  isValid,
+  handleConfirmPlacement,
+  dragCoordinatesRef,
+  setCells
 }) {
   const [boardState, setBoardState] = useState([]);
 
@@ -91,12 +90,11 @@ export default function Board({
               shapeGrid={shape}
               handleStartDragging={handleStartDragging}
               handleStopDragging={handleStopDragging}
-              cellX={cellX} // Pass down cellX state
-              setCellX={setCellX} // Pass down cellX state
-              cellY={cellY} // Pass down cellY state
-              setCellY={setCellY} // Pass down cellY state
               boardState={boardState} // Pass down boardState
               isValid={isValid} // Pass down isValid state
+              handleConfirmPlacement={handleConfirmPlacement} // Pass down handleConfirmPlacement function
+              dragCoordinatesRef={dragCoordinatesRef} // Pass down dragCoordinatesRef state
+              setCells={setCells}
             />
 
         </div>
@@ -115,12 +113,11 @@ export default function Board({
 Board.propTypes = {
   handleStartDragging: PropTypes.func.isRequired,
   handleStopDragging: PropTypes.func.isRequired,
-  cellX: PropTypes.number,
-  setCellX: PropTypes.func,
-  cellY: PropTypes.number,
-  setCellY: PropTypes.func,
   handleFlip: PropTypes.func.isRequired,
   handleRotate: PropTypes.func.isRequired,
   shape: PropTypes.array.isRequired,
-  isValid: PropTypes.bool.isRequired
+  isValid: PropTypes.object.isRequired,
+  handleConfirmPlacement: PropTypes.func.isRequired,
+  dragCoordinatesRef: PropTypes.object.isRequired,
+  setCells: PropTypes.func.isRequired
 }

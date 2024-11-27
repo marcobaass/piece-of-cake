@@ -25,19 +25,20 @@
   transform: scale(1.05);
 }
 
-button.invalid,
 button.valid {
   margin-top: 0.25rem;
   border-radius: 100%;
   font-size: 0.825rem;
-}
-
-.valid {
   padding: 0.1rem 0.35rem;
   color: green;
 }
 
 .invalid {
+  display: inline-block;
+  font-size: 0.825rem;
   padding: 0.1rem;
+  margin-top: 0.25rem;
   color: red;
+  background-color: white;
+  border-radius: 100%;
 }
