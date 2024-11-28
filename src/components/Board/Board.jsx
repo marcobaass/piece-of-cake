@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import styles from './Board.module.css';
 import ShapeSelection from '../ShapeSelection/ShapeSelection';
 import PropTypes from 'prop-types';
@@ -12,9 +12,11 @@ export default function Board({
   isValid,
   handleConfirmPlacement,
   dragCoordinatesRef,
-  setCells
+  setCells,
+  boardState,
+  setBoardState
 }) {
-  const [boardState, setBoardState] = useState([]);
+
 
   // 2. Initialize board
   useEffect(() => {
@@ -22,7 +24,7 @@ export default function Board({
     placeItems(initialBoard, 'coin', 8);   // Place 8 coins
     placeItems(initialBoard, 'object', 6);// Place 6 objects
     setBoardState(initialBoard);
-  }, []);
+  }, [setBoardState]);
 
 
   const createFullGrid = () => {
@@ -71,14 +73,14 @@ export default function Board({
         <div className={styles.board}>
           {/* Rendern des Boards */}
           {boardState.map((row, rowIndex) =>
-            row.map((cell, colIndex) => ( // Fixed variable name (was `col`, should be `cell`)
+            row.map((cell, colIndex) => (
               <div
                 key={`${rowIndex}-${colIndex}`}
                 className={`${rowIndex < 8 ? styles.boardCell : styles.offCell} ${styles[cell.type]}`}
                 id={cell.id} // Jede Zelle hat nun eine eindeutige ID
               >
                 {/* Zeige das Item innerhalb der Zelle an */}
-                {cell.type === 'object' ? '📦' : cell.type === 'coin' ? '💰' : ''}
+                {cell.type === 'object' ? '📦' : cell.type === 'coin' ? '💰' : cell.type === 'cake' ? '🍰' : ''}
               </div>
             ))
           )}
@@ -119,5 +121,7 @@ Board.propTypes = {
   isValid: PropTypes.object.isRequired,
   handleConfirmPlacement: PropTypes.func.isRequired,
   dragCoordinatesRef: PropTypes.object.isRequired,
-  setCells: PropTypes.func.isRequired
+  setCells: PropTypes.func.isRequired,
+  boardState: PropTypes.array.isRequired,
+  setBoardState: PropTypes.func.isRequired
 }
