@@ -13,13 +13,12 @@ function App() {
   const [boardState, setBoardState] = useState([]);
   const draggingStates = useRef(false);
   const isValid = useRef(false);
-  const dragCoordinatesRef = useRef({ x: null, y: null });
+  const dragCoordinatesRef = useRef({ x: 1, y: 9 });
 
   const shapeForms = Object.keys(Shapes);
   const rndShape = Math.floor(Math.random() * shapeForms.length);
   const shapeKey = shapeForms[rndShape];
   const [shape, setShape] = useState(Shapes[shapeKey]);
-  console.log(shape);
 
   const handleStartDragging = () => {
     draggingStates.current = true;
@@ -58,8 +57,14 @@ function App() {
     setCoins(prevCoins => prevCoins + collectedCoins);
     const newBoardstate = updateBoard(x, y, rndShape, boardState);
     setBoardState(newBoardstate);
-    console.log('New Boarstate' , boardState);
-    
+    //create a new random shape
+    console.log('x and y', x, y);
+    const shapeForms = Object.keys(Shapes);
+    const newRndShape = Math.floor(Math.random() * shapeForms.length);
+    const shapeKey = shapeForms[newRndShape];
+    setShape(Shapes[shapeKey]);
+    dragCoordinatesRef.current = { x: 1, y: 9 };
+    console.log('akuelle Zellen:' , dragCoordinatesRef.current.x, dragCoordinatesRef.current.y);
   }
 
 

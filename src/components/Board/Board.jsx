@@ -76,11 +76,17 @@ export default function Board({
             row.map((cell, colIndex) => (
               <div
                 key={`${rowIndex}-${colIndex}`}
-                className={`${rowIndex < 8 ? styles.boardCell : styles.offCell} ${styles[cell.type]}`}
+                className={`${rowIndex < 8 ? styles.boardCell : styles.offCell} ${styles[cell.type]} ${
+                  cell.type === 'cake' ? styles.shapeCell : ''
+                }`}
                 id={cell.id} // Jede Zelle hat nun eine eindeutige ID
               >
                 {/* Zeige das Item innerhalb der Zelle an */}
-                {cell.type === 'object' ? '📦' : cell.type === 'coin' ? '💰' : cell.type === 'cake' ? '🍰' : ''}
+                {cell.type === 'object'
+                  ? '📦'
+                  : cell.type === 'coin'
+                  ? '💰'
+                  : ''}
               </div>
             ))
           )}

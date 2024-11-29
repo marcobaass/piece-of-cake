@@ -49,3 +49,14 @@
   width: var(--cell-size);
   height: var(--cell-size);
 }
+
+.shapeCell {
+  box-sizing: border-box;
+  display: flex;
+  border: 1px solid red;
+  justify-content: center;
+  align-items: center;
+  width: var(--cell-size);
+  height: var(--cell-size);
+  background-color: hsl(0, 0%, 100%);
+}

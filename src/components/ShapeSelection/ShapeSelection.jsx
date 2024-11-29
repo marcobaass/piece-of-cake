@@ -27,7 +27,11 @@ export default function ShapeSelection({
       nodeRef={nodeRef}
       grid={[cellSize(), cellSize()]}
       bounds="section"
-      defaultPosition={{x: cellSize(), y: cellSize()*9}}
+      // defaultPosition={{x: cellSize(), y: cellSize()*9}}
+      position={{
+        x: dragCoordinatesRef.current.x * cellSize(),
+        y: dragCoordinatesRef.current.y * cellSize(),
+      }}
       // onDrag={(e, data) => {
       //   const x = Math.floor(data.x / cellSize());
       //   const y = Math.floor(data.y / cellSize());
