@@ -49,8 +49,9 @@ function App() {
   };
 
   const handleConfirmPlacement = (x, y, rndShape, boardState) => {
-    const collectedCoins = placeTile(x, y, rndShape, boardState);
+    const [collectedCoins, collectedPoints] = placeTile(x, y, rndShape, boardState);
     setCoins(prevCoins => prevCoins + collectedCoins);
+    setScore(prevScore => prevScore + collectedPoints);
     const newBoardstate = updateBoard(x, y, rndShape, boardState);
     setBoardState(newBoardstate);
     newShape(Shapes, setShape, dragCoordinatesRef);

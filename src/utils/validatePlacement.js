@@ -31,6 +31,7 @@ export function validatePlacement(colShape, rowShape, shapeGrid, boardState) {
 
 export function placeTile(colShape, rowShape, shapeGrid, boardState) {
   let collectedCoins = 0;
+  let collectedPoints = 0;
 
   shapeGrid.forEach(row => {
     row.forEach(cell => {
@@ -41,13 +42,18 @@ export function placeTile(colShape, rowShape, shapeGrid, boardState) {
       if (cell === 1 & cellType === 'coin') {
         collectedCoins ++;
       }
+
+      if (cell === 1 & cellType === 'board') {
+        collectedPoints ++;
+      }
+
       colShape++;
     });
     rowShape ++;
     colShape = colShape - shapeGrid[0].length;
   });
 
-  return collectedCoins;
+  return [collectedCoins, collectedPoints];
 }
 
 
