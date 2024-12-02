@@ -39,7 +39,6 @@ export function placeTile(colShape, rowShape, shapeGrid, boardState) {
       console.log('#', cellType, rowShape, colShape);
 
       if (cell === 1 & cellType === 'coin') {
-        console.log('Coin found')
         collectedCoins ++;
       }
       colShape++;

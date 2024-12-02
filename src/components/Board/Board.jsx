@@ -14,15 +14,19 @@ export default function Board({
   dragCoordinatesRef,
   setCells,
   boardState,
-  setBoardState
+  setBoardState,
+  coins,
+  handleReroll,
+  boardCoins,
+  boardObjects
 }) {
 
 
   // 2. Initialize board
   useEffect(() => {
     const initialBoard = createFullGrid();
-    placeItems(initialBoard, 'coin', 8);   // Place 8 coins
-    placeItems(initialBoard, 'object', 6);// Place 6 objects
+    placeItems(initialBoard, 'coin', boardCoins);   // Place 8 coins
+    placeItems(initialBoard, 'object', boardObjects);// Place 12 objects
     setBoardState(initialBoard);
   }, [setBoardState]);
 
@@ -112,6 +116,7 @@ export default function Board({
       <div className={styles.shapeButtons}>
         <button onClick={() => handleRotate(boardState)}>Rotate</button>
         <button onClick={() => handleFlip(boardState)}>Flip</button>
+        { (coins > 0) ? <button onClick={() => handleReroll()}>Reroll (1c)</button> : '' }
       </div>
 
     </div>
@@ -129,5 +134,10 @@ Board.propTypes = {
   dragCoordinatesRef: PropTypes.object.isRequired,
   setCells: PropTypes.func.isRequired,
   boardState: PropTypes.array.isRequired,
-  setBoardState: PropTypes.func.isRequired
+  setBoardState: PropTypes.func.isRequired,
+  coins: PropTypes.number.isRequired,
+  setCoins: PropTypes.func.isRequired,
+  handleReroll: PropTypes.func.isRequired,
+  boardCoins: PropTypes.number.isRequired,
+  boardObjects: PropTypes.number.isRequired
 }

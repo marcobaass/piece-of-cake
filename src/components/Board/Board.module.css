@@ -23,8 +23,9 @@
 }
 
 .shapeButtons {
-  margin-top: 0; /* Platz für den Button-Bereich */
+  margin-top: 1rem; /* Platz für den Button-Bereich */
   display: flex;
+  flex-direction: column;
   justify-content: center;
   gap: 10px;
 }

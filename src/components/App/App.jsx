@@ -5,10 +5,13 @@ import PlayerUI from '../PlayerUI/PlayerUI';
 import { validatePlacement, placeTile, updateBoard } from '../../utils/validatePlacement.js';
 import { rotate90Deg, flipHorizontal } from '../../utils/shapeConfig';
 import { Shapes } from '../../utils/shapes';
+import newShape from '../../utils/newShape.js';
 
 function App() {
+  const [boardCoins] = useState(8);
+  const [boardObjects] = useState(12);
   const [coins, setCoins] = useState(0);
-  const [score, setScore] = useState(0);
+  const [score, setScore] = useState(boardCoins + boardObjects - 8 * 8);
   const [cells, setCells] = useState({})
   const [boardState, setBoardState] = useState([]);
   const draggingStates = useRef(false);
@@ -29,18 +32,13 @@ function App() {
     draggingStates.current = false;
     const check = validatePlacement(x, y, rndShape, boardState);
     isValid.current = check;
-    console.log(isValid.current);
-    console.log(coins);
   };
 
   const handleRotate = (boardState) => {
     const rotatedShape = rotate90Deg(shape);
     setShape(rotatedShape);
-    console.log('Board in handleRotate', boardState);
     const check = validatePlacement(dragCoordinatesRef.current.x, dragCoordinatesRef.current.y, rotatedShape, boardState);
     isValid.current = check;
-    console.log(isValid.current);
-    console.log(coins);
   };
 
   const handleFlip = (boardState) => {
@@ -48,8 +46,6 @@ function App() {
     setShape(flippedShape);
     const check = validatePlacement(dragCoordinatesRef.current.x, dragCoordinatesRef.current.y, flippedShape, boardState);
     isValid.current = check;
-    console.log(isValid.current);
-    console.log(coins);
   };
 
   const handleConfirmPlacement = (x, y, rndShape, boardState) => {
@@ -57,14 +53,13 @@ function App() {
     setCoins(prevCoins => prevCoins + collectedCoins);
     const newBoardstate = updateBoard(x, y, rndShape, boardState);
     setBoardState(newBoardstate);
-    //create a new random shape
-    console.log('x and y', x, y);
-    const shapeForms = Object.keys(Shapes);
-    const newRndShape = Math.floor(Math.random() * shapeForms.length);
-    const shapeKey = shapeForms[newRndShape];
-    setShape(Shapes[shapeKey]);
-    dragCoordinatesRef.current = { x: 1, y: 9 };
-    console.log('akuelle Zellen:' , dragCoordinatesRef.current.x, dragCoordinatesRef.current.y);
+    newShape(Shapes, setShape, dragCoordinatesRef);
+    isValid.current = false;
+  }
+
+  const handleReroll = () => {
+    newShape(Shapes, setShape, dragCoordinatesRef);
+    setCoins(prevCoins => prevCoins - 1);
   }
 
 
@@ -90,6 +85,10 @@ function App() {
         setCells={setCells} // Pass down setCells function to update the board cells array
         boardState={boardState}
         setBoardState={setBoardState}
+        coins={coins}
+        handleReroll={handleReroll}
+        boardCoins={boardCoins}
+        boardObjects={boardObjects}
       />
     </div>
   )
