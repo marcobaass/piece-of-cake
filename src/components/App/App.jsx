@@ -6,6 +6,7 @@ import { validatePlacement, placeTile, updateBoard } from '../../utils/validateP
 import { rotate90Deg, flipHorizontal } from '../../utils/shapeConfig';
 import { Shapes } from '../../utils/shapes';
 import newShape from '../../utils/newShape.js';
+import checkGameEnd from '../../utils/checkGameEnd.js';
 
 function App() {
   const [boardCoins] = useState(8);
@@ -56,6 +57,7 @@ function App() {
     setBoardState(newBoardstate);
     newShape(Shapes, setShape, dragCoordinatesRef);
     isValid.current = false;
+    console.log('Empty Boardcells: ', checkGameEnd(rndShape, boardState));
   }
 
   const handleReroll = () => {
