@@ -32,11 +32,6 @@ export default function ShapeSelection({
         x: dragCoordinatesRef.current.x * cellSize(),
         y: dragCoordinatesRef.current.y * cellSize(),
       }}
-      // onDrag={(e, data) => {
-      //   const x = Math.floor(data.x / cellSize());
-      //   const y = Math.floor(data.y / cellSize());
-      //   console.log(`Grid Position: x=${x}, y=${y}`); // Directly log the calculated grid position
-      // }}
 
       onStart={() => {
         handleStartDragging();
@@ -48,9 +43,7 @@ export default function ShapeSelection({
       onStop={(e, data) => {
         const x = Math.floor(data.x / cellSize());
         const y = Math.floor(data.y / cellSize());
-        console.log(`Final Grid Position: x=${x}, y=${y}`);
         dragCoordinatesRef.current = { x, y };
-        console.log('Shape Array:', shapeGrid)
         setCells({x, y});
         handleStopDragging(x, y, shapeGrid, boardState);
         nodeRef.current.querySelectorAll(`.${styles.filled}`).forEach(cell => {
@@ -70,8 +63,6 @@ export default function ShapeSelection({
             </div>
           ))}
         </div>
-
-        {console.log("isValid.current before rendering:", isValid.current)}
 
         <div>
           { isValid.current ? (

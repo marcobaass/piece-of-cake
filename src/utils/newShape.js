@@ -4,4 +4,5 @@ export default function newShape(Shapes, setShape, dragCoordinatesRef) {
   const shapeKey = shapeForms[newRndShape];
   setShape(Shapes[shapeKey]);
   dragCoordinatesRef.current = { x: 1, y: 9 };
+  return Shapes[shapeKey];
 }

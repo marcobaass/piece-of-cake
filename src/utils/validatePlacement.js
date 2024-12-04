@@ -4,18 +4,14 @@ export function validatePlacement(colShape, rowShape, shapeGrid, boardState) {
 
   shapeGrid.forEach(row => {
     row.forEach(cell => {
-      console.log('RowShape:', rowShape, 'ColShape:', colShape, 'Board State:', boardState);
       let cellType = boardState[rowShape][colShape].type;
-      console.log('#', cellType, rowShape, colShape);
       if (cell === 1 && (cellType !== 'coin' && cellType !== 'board') ) {
         check = false;
       }
       if (cell === 1 & cellType === 'object') {
-        console.log('Object hit');
         check = false;
       }
       if (cell === 1 & cellType === 'cake') {
-        console.log('There is already cake');
         check = false;
       }
       colShape++;
@@ -35,9 +31,7 @@ export function placeTile(colShape, rowShape, shapeGrid, boardState) {
 
   shapeGrid.forEach(row => {
     row.forEach(cell => {
-      console.log('RowShape:', rowShape, 'ColShape:', colShape, 'Board State:', boardState);
       let cellType = boardState[rowShape][colShape].type;
-      console.log('#', cellType, rowShape, colShape);
 
       if (cell === 1 & cellType === 'coin') {
         collectedCoins ++;

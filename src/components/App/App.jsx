@@ -55,13 +55,32 @@ function App() {
     setScore(prevScore => prevScore + collectedPoints);
     const newBoardstate = updateBoard(x, y, rndShape, boardState);
     setBoardState(newBoardstate);
-    newShape(Shapes, setShape, dragCoordinatesRef);
+    const newRndShape = newShape(Shapes, setShape, dragCoordinatesRef);
+    console.log('neues Teil' ,newRndShape);
+
     isValid.current = false;
-    console.log('Empty Boardcells: ', checkGameEnd(rndShape, boardState));
+    console.log('Teil: ', rndShape);
+    // console.log('Teil fits not: ', checkGameEnd(newRndShape, newBoardstate));
+
+    if (checkGameEnd(newRndShape, newBoardstate)) {
+      if (coins === 0) {
+        console.log('Spielende!');
+      } else {
+        console.log('Reroll?');
+      }
+    }
   }
 
   const handleReroll = () => {
-    newShape(Shapes, setShape, dragCoordinatesRef);
+    // newShape(Shapes, setShape, dragCoordinatesRef);
+    const newRndShape = newShape(Shapes, setShape, dragCoordinatesRef);
+    if (checkGameEnd(newRndShape, boardState)) {
+      if (coins === 0) {
+        console.log('Spielende!');
+      } else {
+        console.log('Reroll?');
+      }
+    }
     setCoins(prevCoins => prevCoins - 1);
   }
 
