@@ -7,6 +7,7 @@ import { rotate90Deg, flipHorizontal } from '../../utils/shapeConfig';
 import { Shapes } from '../../utils/shapes';
 import newShape from '../../utils/newShape.js';
 import checkGameEnd from '../../utils/checkGameEnd.js';
+import GameEnd from '../GameEnd/GameEnd.jsx';
 
 function App() {
   const [boardCoins] = useState(8);
@@ -15,6 +16,7 @@ function App() {
   const [score, setScore] = useState(boardCoins + boardObjects - 8 * 8);
   const [cells, setCells] = useState({})
   const [boardState, setBoardState] = useState([]);
+  const [gameEnded, setGameEnded] = useState(false);
   const draggingStates = useRef(false);
   const isValid = useRef(false);
   const dragCoordinatesRef = useRef({ x: 1, y: 9 });
@@ -56,15 +58,17 @@ function App() {
     const newBoardstate = updateBoard(x, y, rndShape, boardState);
     setBoardState(newBoardstate);
     const newRndShape = newShape(Shapes, setShape, dragCoordinatesRef);
-    console.log('neues Teil' ,newRndShape);
 
     isValid.current = false;
-    console.log('Teil: ', rndShape);
     // console.log('Teil fits not: ', checkGameEnd(newRndShape, newBoardstate));
 
     if (checkGameEnd(newRndShape, newBoardstate)) {
+      console.log('checkGameEnd= ', checkGameEnd(newRndShape, newBoardstate));
+      console.log('Coins left: ', coins);
       if (coins === 0) {
-        console.log('Spielende!');
+        console.log('Spielende')
+        setGameEnded(true);
+        console.log('set true: ', gameEnded);
       } else {
         console.log('Reroll?');
       }
@@ -73,15 +77,18 @@ function App() {
 
   const handleReroll = () => {
     // newShape(Shapes, setShape, dragCoordinatesRef);
+    setCoins(prevCoins => prevCoins - 1);
     const newRndShape = newShape(Shapes, setShape, dragCoordinatesRef);
     if (checkGameEnd(newRndShape, boardState)) {
+      console.log('Coins left: ', coins);
       if (coins === 0) {
-        console.log('Spielende!');
+        console.log('Spielende')
+        setGameEnded(true);
+        console.log('set true: ', gameEnded);
       } else {
         console.log('Reroll?');
       }
     }
-    setCoins(prevCoins => prevCoins - 1);
   }
 
 
@@ -111,6 +118,10 @@ function App() {
         handleReroll={handleReroll}
         boardCoins={boardCoins}
         boardObjects={boardObjects}
+      />
+      <GameEnd
+        gameEnded={gameEnded}
+        setGameEnded={setGameEnded}
       />
     </div>
   )
