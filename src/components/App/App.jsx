@@ -25,6 +25,7 @@ function App() {
   const rndShape = Math.floor(Math.random() * shapeForms.length);
   const shapeKey = shapeForms[rndShape];
   const [shape, setShape] = useState(Shapes[shapeKey]);
+  const [showRerollPrompt, setShowRerollPrompt] = useState(false);
 
   const handleStartDragging = () => {
     draggingStates.current = true;
@@ -68,8 +69,10 @@ function App() {
         setGameEnded(true);
         console.log('set true: ', gameEnded);
       } else {
-        console.log('Reroll?');
+        setShowRerollPrompt(true);
       }
+    } else {
+      setShowRerollPrompt(false);
     }
   }
 
@@ -119,6 +122,12 @@ function App() {
         boardCoins={boardCoins}
         boardObjects={boardObjects}
       />
+      {
+        showRerollPrompt &&
+        <div className={styles.rerollPrompt}>
+          <button onClick={GameEnd}>Do you want to End the game?</button>
+        </div>
+      }
       <GameEnd
         gameEnded={gameEnded}
         setGameEnded={setGameEnded}
