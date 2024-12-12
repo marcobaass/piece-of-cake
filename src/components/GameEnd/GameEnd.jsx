@@ -1,6 +1,6 @@
 
 export default function GameEnd(gameEnded) {
-  console.log(gameEnded);
+  // console.log(gameEnded);
 
 
   return (

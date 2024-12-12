@@ -7,7 +7,6 @@ export default function checkGameEnd(rndShape, boardState) {
     let currentShape = shape;
 
     for (let i = 0; i < 4; i++) {
-      // debugger;
       const original = JSON.stringify(currentShape);
       transformations.add(original);
 
@@ -21,8 +20,6 @@ export default function checkGameEnd(rndShape, boardState) {
   }
 
   const transformations = getAllTransformations(rndShape);
-
-
 
   for (let boardY = 0; boardY < boardState.length; boardY++) {
 
@@ -41,27 +38,29 @@ export default function checkGameEnd(rndShape, boardState) {
   }
 
   function canPlace(shape, boardState, boardY, boardX) {
+    // debugger;
     const boardHeight = boardState.length;
     const boardWidth = boardState[0].length;
-
     for (let shapeY = 0; shapeY < shape.length; shapeY++) {
       for (let shapeX = 0; shapeX < shape[0].length; shapeX++) {
 
-        const targetY = shapeY + boardY;
-        const targetX = shapeX + boardX;
+        if (shape[shapeY][shapeX] === 1) {
+          const targetY = shapeY + boardY;
+          const targetX = shapeX + boardX;
 
-        if (
-          targetY >= boardHeight ||
-          targetY < 0 ||
-          targetX >= boardWidth ||
-          targetX < 0) {
-          return false;
-        }
+          if (
+            targetY >= boardHeight ||
+            targetY < 0 ||
+            targetX >= boardWidth ||
+            targetX < 0) {
+            return false;
+          }
 
-        const cell = boardState[targetY][targetX];
+          const cell = boardState[targetY][targetX];
 
-        if (cell.type !== 'board' && cell.type !== 'coin') {
-          return false;
+          if (cell.type !== 'board' && cell.type !== 'coin') {
+            return false;
+          }
         }
       }
     }

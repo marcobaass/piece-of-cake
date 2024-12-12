@@ -60,11 +60,9 @@ function App() {
     const newRndShape = newShape(Shapes, setShape, dragCoordinatesRef);
 
     isValid.current = false;
-    // console.log('Teil fits not: ', checkGameEnd(newRndShape, newBoardstate));
 
     if (checkGameEnd(newRndShape, newBoardstate)) {
-      console.log('checkGameEnd= ', checkGameEnd(newRndShape, newBoardstate));
-      console.log('Coins left: ', coins);
+
       if (coins === 0) {
         console.log('Spielende')
         setGameEnded(true);
@@ -76,20 +74,22 @@ function App() {
   }
 
   const handleReroll = () => {
-    // newShape(Shapes, setShape, dragCoordinatesRef);
-    setCoins(prevCoins => prevCoins - 1);
-    const newRndShape = newShape(Shapes, setShape, dragCoordinatesRef);
-    if (checkGameEnd(newRndShape, boardState)) {
-      console.log('Coins left: ', coins);
-      if (coins === 0) {
-        console.log('Spielende')
-        setGameEnded(true);
-        console.log('set true: ', gameEnded);
-      } else {
-        console.log('Reroll?');
+    setCoins(prevCoins => {
+      const newCoins = prevCoins -1;
+      const newRndShape = newShape(Shapes, setShape, dragCoordinatesRef);
+      if (checkGameEnd(newRndShape, boardState)) {
+        console.log('Coins left: ', newCoins);
+        if (newCoins === 0) {
+          console.log('Spielende')
+          setGameEnded(true);
+          console.log('set true: ', gameEnded);
+        } else {
+          console.log('Reroll?');
+        }
       }
-    }
-  }
+      return newCoins;
+    });
+  };
 
 
 
