@@ -63,7 +63,6 @@ function App() {
     isValid.current = false;
 
     if (checkGameEnd(newRndShape, newBoardstate)) {
-
       if (coins === 0) {
         console.log('Spielende')
         setGameEnded(true);
@@ -80,16 +79,22 @@ function App() {
     setCoins(prevCoins => {
       const newCoins = prevCoins -1;
       const newRndShape = newShape(Shapes, setShape, dragCoordinatesRef);
+
       if (checkGameEnd(newRndShape, boardState)) {
         console.log('Coins left: ', newCoins);
         if (newCoins === 0) {
           console.log('Spielende')
           setGameEnded(true);
           console.log('set true: ', gameEnded);
+          setShowRerollPrompt(false);
         } else {
           console.log('Reroll?');
+          setShowRerollPrompt(true);
         }
+      } else {
+        setShowRerollPrompt(false);
       }
+
       return newCoins;
     });
   };
@@ -125,12 +130,14 @@ function App() {
       {
         showRerollPrompt &&
         <div className={styles.rerollPrompt}>
-          <button onClick={GameEnd}>Do you want to End the game?</button>
+          <button onClick={() => setGameEnded(true)}>Do you want to End the game?</button>
         </div>
       }
       <GameEnd
         gameEnded={gameEnded}
         setGameEnded={setGameEnded}
+        coins={coins}
+        score={score}
       />
     </div>
   )
