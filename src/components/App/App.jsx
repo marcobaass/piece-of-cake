@@ -54,10 +54,20 @@ function App() {
 
   const handleConfirmPlacement = (x, y, rndShape, boardState) => {
     const [collectedCoins, collectedPoints] = placeTile(x, y, rndShape, boardState);
-    setCoins(prevCoins => prevCoins + collectedCoins);
-    setScore(prevScore => prevScore + collectedPoints);
+
+    // 1. Neue Coins und Score berechnen
+    const newCoins = coins + collectedCoins;
+    const newScore = score + collectedPoints;
+
+    // 2. State aktualisieren
+    setCoins(newCoins);
+    setScore(newScore);
+
+    // 3. Board updaten
     const newBoardstate = updateBoard(x, y, rndShape, boardState);
     setBoardState(newBoardstate);
+
+    // 4. Neues Shape generieren
     const newRndShape = newShape(Shapes, setShape, dragCoordinatesRef);
 
     isValid.current = false;
@@ -66,7 +76,7 @@ function App() {
     console.log(checkGameEnd(newRndShape, boardState));
 
     if (checkGameEnd(newRndShape, newBoardstate)) {
-      if (coins === 0) {
+      if (newCoins === 0) {
         console.log('Spielende')
         setGameEnded(true);
         console.log('set true: ', gameEnded);
@@ -79,30 +89,28 @@ function App() {
   }
 
   const handleReroll = () => {
-    setCoins(prevCoins => {
-      const newCoins = prevCoins -1;
-      const newRndShape = newShape(Shapes, setShape, dragCoordinatesRef);
 
-      console.log(newRndShape);
-      console.log(checkGameEnd(newRndShape, boardState));
+    const newCoins = coins -1;
 
-      if (checkGameEnd(newRndShape, boardState)) {
-        console.log('Coins left: ', newCoins);
-        if (newCoins === 0) {
-          console.log('Spielende')
-          setGameEnded(true);
-          console.log('set true: ', gameEnded);
-          setShowRerollPrompt(false);
-        } else {
-          console.log('Reroll?');
-          setShowRerollPrompt(true);
-        }
-      } else {
+    setCoins(newCoins);
+
+    console.log('Coins left: ', newCoins);
+
+    const newRndShape = newShape(Shapes, setShape, dragCoordinatesRef);
+
+    if (checkGameEnd(newRndShape, boardState)) {
+      if (newCoins === 0) {
+        console.log('Spielende')
+        setGameEnded(true);
+        console.log('set true: ', gameEnded);
         setShowRerollPrompt(false);
+      } else {
+        console.log('Reroll?');
+        setShowRerollPrompt(true);
       }
-
-      return newCoins;
-    });
+    } else {
+      setShowRerollPrompt(false);
+    }
   };
 
 
