@@ -62,6 +62,9 @@ function App() {
 
     isValid.current = false;
 
+    console.log(newRndShape);
+    console.log(checkGameEnd(newRndShape, boardState));
+
     if (checkGameEnd(newRndShape, newBoardstate)) {
       if (coins === 0) {
         console.log('Spielende')
@@ -79,6 +82,9 @@ function App() {
     setCoins(prevCoins => {
       const newCoins = prevCoins -1;
       const newRndShape = newShape(Shapes, setShape, dragCoordinatesRef);
+
+      console.log(newRndShape);
+      console.log(checkGameEnd(newRndShape, boardState));
 
       if (checkGameEnd(newRndShape, boardState)) {
         console.log('Coins left: ', newCoins);
