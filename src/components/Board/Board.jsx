@@ -18,17 +18,18 @@ export default function Board({
   coins,
   handleReroll,
   boardCoins,
-  boardObjects
+  boardObjects,
+  objectsRef // an array of all the objects
 }) {
-
 
   // 2. Initialize board
   useEffect(() => {
+    objectsRef.current = [];
     const initialBoard = createFullGrid();
     placeItems(initialBoard, 'coin', boardCoins);   // Place 8 coins
     placeItems(initialBoard, 'object', boardObjects);// Place 12 objects
     setBoardState(initialBoard);
-  }, [setBoardState]);
+  }, []);
 
 
   const createFullGrid = () => {
@@ -57,6 +58,7 @@ export default function Board({
 
         // Falls es sich um ein 'object' handelt, benachbarte Zellen markieren
         if (itemType === 'object') {
+          objectsRef.current.push(board[rowIndex][colIndex]);
           // Nachbarzellen im board-Bereich prüfen und als besetzt markieren
           if (rowIndex < 7) board[rowIndex + 1][colIndex].occupied = true; // Unten
           if (rowIndex > 0) board[rowIndex - 1][colIndex].occupied = true; // Oben
@@ -139,5 +141,6 @@ Board.propTypes = {
   setCoins: PropTypes.func.isRequired,
   handleReroll: PropTypes.func.isRequired,
   boardCoins: PropTypes.number.isRequired,
-  boardObjects: PropTypes.number.isRequired
+  boardObjects: PropTypes.number.isRequired,
+  objectsRef: PropTypes.object.isRequired
 }

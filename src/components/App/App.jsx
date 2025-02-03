@@ -8,6 +8,7 @@ import { Shapes } from '../../utils/shapes';
 import newShape from '../../utils/newShape.js';
 import checkGameEnd from '../../utils/checkGameEnd.js';
 import GameEnd from '../GameEnd/GameEnd.jsx';
+import checkSurround from '../../utils/checkSurround.js';
 
 function App() {
   const [boardCoins] = useState(8);
@@ -26,6 +27,8 @@ function App() {
   const shapeKey = shapeForms[rndShape];
   const [shape, setShape] = useState(Shapes[shapeKey]);
   const [showRerollPrompt, setShowRerollPrompt] = useState(false);
+
+  const objectsRef = useRef([]);
 
   const handleStartDragging = () => {
     draggingStates.current = true;
@@ -62,6 +65,7 @@ function App() {
 
     isValid.current = false;
 
+    checkSurround(newBoardstate, objectsRef);
     console.log(newRndShape);
     console.log(checkGameEnd(newRndShape, boardState));
 
@@ -76,6 +80,7 @@ function App() {
     } else {
       setShowRerollPrompt(false);
     }
+
   }
 
   const handleReroll = () => {
@@ -132,6 +137,7 @@ function App() {
         handleReroll={handleReroll}
         boardCoins={boardCoins}
         boardObjects={boardObjects}
+        objectsRef={objectsRef}
       />
       {
         showRerollPrompt &&
