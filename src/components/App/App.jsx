@@ -58,6 +58,8 @@ function App() {
   const handleConfirmPlacement = (x, y, rndShape, boardState) => {
     const [collectedCoins, collectedPoints] = placeTile(x, y, rndShape, boardState);
     setCoins(prevCoins => prevCoins + collectedCoins);
+    const scoreBeforeSurround = score + collectedPoints;
+    console.log('Score Before Surround: ', scoreBeforeSurround);
     setScore(prevScore => prevScore + collectedPoints);
     const newBoardstate = updateBoard(x, y, rndShape, boardState);
     setBoardState(newBoardstate);
@@ -65,7 +67,7 @@ function App() {
 
     isValid.current = false;
 
-    checkSurround(newBoardstate, objectsRef);
+    checkSurround(newBoardstate, objectsRef, scoreBeforeSurround, setScore, coins);
     console.log(newRndShape);
     console.log(checkGameEnd(newRndShape, boardState));
 

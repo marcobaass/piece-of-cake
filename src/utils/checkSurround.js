@@ -1,5 +1,13 @@
-export default function checkSurround(newBoardState, objectsRef) {
+export default function checkSurround(newBoardState, objectsRef, scoreBeforeSurround, setScore, coins) {
   const flatBoardState = newBoardState.flat();
+  const objectsToRemove = [];
+  const updateScore = (coinsToAdd) => {
+    console.log('coins to add', coinsToAdd);
+    console.log('prevScore', scoreBeforeSurround);
+    console.log('updated score', scoreBeforeSurround+coinsToAdd);
+    const newScore = scoreBeforeSurround+coinsToAdd;
+    setScore(newScore);
+  }
 
   for (const object of objectsRef.current) {
     const [rowPart, colPart] = object.id.split('-');
@@ -27,19 +35,22 @@ export default function checkSurround(newBoardState, objectsRef) {
 
     if (!notSurrounded) {
       console.log(`✅ Object at ${object.id} is completely surrounded.`);
-      // object aus dem useref entfernen
-      // evtl auf length checken? um zu sehen ob alles umrandet wurde?
-      // score die anzahl coins hinzufügen
+      objectsToRemove.push(object.id);
       // zur logik gehen, die ein single piece platzieren lässt
-      // was passiert wenn ich zwei oder mehr objekte auf einmal umrande?
-      // object.remove();
-      // add score for each coin
-      // console.log(score);
-      // score += coins;
-      // setScore(score);
     } else {
       console.log(`❌ Object at ${object.id} is NOT completely surrounded.`);
       // es passiert nichts weiter und das spiel geht normal weiter
     }
+
+    if (objectsToRemove.length > 0) {
+      objectsRef.current = objectsRef.current.filter(obj => !objectsToRemove.includes(obj.id));
+      console.log(`Entfernte Objekte: ${objectsToRemove.join(', ')}`);
+      console.log('Aktueller Stand von objectsRef:', objectsRef.current);
+
+      const coinsToAdd = objectsToRemove.length * coins;
+      updateScore(coinsToAdd);
+    }
+
   }
+
 }

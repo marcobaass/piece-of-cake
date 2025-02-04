@@ -35,6 +35,7 @@ export function placeTile(colShape, rowShape, shapeGrid, boardState) {
 
       if (cell === 1 & cellType === 'coin') {
         collectedCoins ++;
+        collectedPoints ++;
       }
 
       if (cell === 1 & cellType === 'board') {
