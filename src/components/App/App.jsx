@@ -63,13 +63,17 @@ function App() {
     setScore(prevScore => prevScore + collectedPoints);
     const newBoardstate = updateBoard(x, y, rndShape, boardState);
     setBoardState(newBoardstate);
-    const newRndShape = newShape(Shapes, setShape, dragCoordinatesRef);
+    let newRndShape = newShape(Shapes, setShape, dragCoordinatesRef);
 
     isValid.current = false;
 
-    checkSurround(newBoardstate, objectsRef, scoreBeforeSurround, setScore, coins);
+    checkSurround(newBoardstate, objectsRef, scoreBeforeSurround, setScore, coins, newRndShape, setShape);
     console.log(newRndShape);
     console.log(checkGameEnd(newRndShape, boardState));
+    // newRndShape = [[1]];
+    // setShape(newRndShape);
+    console.log('single: ', newRndShape);
+
 
     if (checkGameEnd(newRndShape, newBoardstate)) {
       if (coins === 0) {

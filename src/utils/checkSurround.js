@@ -1,12 +1,14 @@
-export default function checkSurround(newBoardState, objectsRef, scoreBeforeSurround, setScore, coins) {
+export default function checkSurround(newBoardState, objectsRef, scoreBeforeSurround, setScore, coins, newRndShape, setShape) {
   const flatBoardState = newBoardState.flat();
   const objectsToRemove = [];
-  const updateScore = (coinsToAdd) => {
+  const updateScore = (coinsToAdd, newRndShape, setShape) => {
     console.log('coins to add', coinsToAdd);
     console.log('prevScore', scoreBeforeSurround);
     console.log('updated score', scoreBeforeSurround+coinsToAdd);
     const newScore = scoreBeforeSurround+coinsToAdd;
     setScore(newScore);
+    newRndShape = [[1]];
+    setShape(newRndShape);
   }
 
   for (const object of objectsRef.current) {
@@ -48,9 +50,8 @@ export default function checkSurround(newBoardState, objectsRef, scoreBeforeSurr
       console.log('Aktueller Stand von objectsRef:', objectsRef.current);
 
       const coinsToAdd = objectsToRemove.length * coins;
-      updateScore(coinsToAdd);
+      updateScore(coinsToAdd, newRndShape, setShape);
+      // placeSingle
     }
-
   }
-
 }
