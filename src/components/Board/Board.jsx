@@ -19,7 +19,9 @@ export default function Board({
   handleReroll,
   boardCoins,
   boardObjects,
-  objectsRef // an array of all the objects
+  objectsRef, // an array of all the objects
+  setGameEnded,
+  showRerollPrompt
 }) {
 
   // 2. Initialize board
@@ -119,6 +121,10 @@ export default function Board({
         <button onClick={() => handleRotate(boardState)}>Rotate</button>
         <button onClick={() => handleFlip(boardState)}>Flip</button>
         { (coins > 0) ? <button onClick={() => handleReroll()}>Reroll (1c)</button> : '' }
+        {
+        showRerollPrompt &&
+          <button onClick={() => setGameEnded(true)}>End Game?</button>
+      }
       </div>
 
     </div>
@@ -138,9 +144,10 @@ Board.propTypes = {
   boardState: PropTypes.array.isRequired,
   setBoardState: PropTypes.func.isRequired,
   coins: PropTypes.number.isRequired,
-  setCoins: PropTypes.func.isRequired,
   handleReroll: PropTypes.func.isRequired,
   boardCoins: PropTypes.number.isRequired,
   boardObjects: PropTypes.number.isRequired,
-  objectsRef: PropTypes.object.isRequired
+  objectsRef: PropTypes.object.isRequired,
+  setGameEnded: PropTypes.func.isRequired,
+  showRerollPrompt: PropTypes.bool.isRequired
 }

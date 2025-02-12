@@ -1,15 +1,11 @@
 export default function checkSurround(newBoardState, objectsRef, scoreBeforeSurround, setScore, coins, newRndShape, setShape) {
   const flatBoardState = newBoardState.flat();
   const objectsToRemove = [];
-  const updateScore = (coinsToAdd, newRndShape, setShape) => {
-    console.log('coins to add', coinsToAdd);
-    console.log('prevScore', scoreBeforeSurround);
-    console.log('updated score', scoreBeforeSurround+coinsToAdd);
-    const newScore = scoreBeforeSurround+coinsToAdd;
-    setScore(newScore);
-    newRndShape = [[1]];
-    setShape(newRndShape);
-  }
+  // const updateScore = (coinsToAdd, newRndShape, setShape) => {
+  //   const newScore = scoreBeforeSurround+coinsToAdd;
+  //   setScore(newScore);
+  //   setShape([[1]]);
+  // }
 
   for (const object of objectsRef.current) {
     const [rowPart, colPart] = object.id.split('-');
@@ -36,22 +32,18 @@ export default function checkSurround(newBoardState, objectsRef, scoreBeforeSurr
     });
 
     if (!notSurrounded) {
-      console.log(`✅ Object at ${object.id} is completely surrounded.`);
       objectsToRemove.push(object.id);
-      // zur logik gehen, die ein single piece platzieren lässt
-    } else {
-      console.log(`❌ Object at ${object.id} is NOT completely surrounded.`);
-      // es passiert nichts weiter und das spiel geht normal weiter
-    }
-
-    if (objectsToRemove.length > 0) {
-      objectsRef.current = objectsRef.current.filter(obj => !objectsToRemove.includes(obj.id));
-      console.log(`Entfernte Objekte: ${objectsToRemove.join(', ')}`);
-      console.log('Aktueller Stand von objectsRef:', objectsRef.current);
-
-      const coinsToAdd = objectsToRemove.length * coins;
-      updateScore(coinsToAdd, newRndShape, setShape);
-      // placeSingle
     }
   }
+
+  if (objectsToRemove.length > 0) {
+    objectsRef.current = objectsRef.current.filter(obj => !objectsToRemove.includes(obj.id));
+
+    const coinsToAdd = objectsToRemove.length * coins;
+    // updateScore(coinsToAdd, newRndShape, setShape);
+    setScore(prev => prev + coinsToAdd);
+    setShape([[1]]);
+    return [[1]];
+  }
+  return newRndShape;
 }

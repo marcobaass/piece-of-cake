@@ -9,6 +9,7 @@ import newShape from '../../utils/newShape.js';
 import checkGameEnd from '../../utils/checkGameEnd.js';
 import GameEnd from '../GameEnd/GameEnd.jsx';
 import checkSurround from '../../utils/checkSurround.js';
+import { checkFullBoard } from '../../utils/checkFullBoard.js';
 
 function App() {
   const [boardCoins] = useState(8);
@@ -59,7 +60,6 @@ function App() {
     const [collectedCoins, collectedPoints] = placeTile(x, y, rndShape, boardState);
     setCoins(prevCoins => prevCoins + collectedCoins);
     const scoreBeforeSurround = score + collectedPoints;
-    console.log('Score Before Surround: ', scoreBeforeSurround);
     setScore(prevScore => prevScore + collectedPoints);
     const newBoardstate = updateBoard(x, y, rndShape, boardState);
     setBoardState(newBoardstate);
@@ -67,26 +67,22 @@ function App() {
 
     isValid.current = false;
 
-    checkSurround(newBoardstate, objectsRef, scoreBeforeSurround, setScore, coins, newRndShape, setShape);
-    console.log(newRndShape);
-    console.log(checkGameEnd(newRndShape, boardState));
-    // newRndShape = [[1]];
-    // setShape(newRndShape);
-    console.log('single: ', newRndShape);
-
+    newRndShape = checkSurround(newBoardstate, objectsRef, scoreBeforeSurround, setScore, coins, newRndShape, setShape);
 
     if (checkGameEnd(newRndShape, newBoardstate)) {
-      if (coins === 0) {
-        console.log('Spielende')
+      // check if exact one board left
+      const singleBoard = newBoardstate.flat().filter(cell => cell.type === 'board').length;
+
+      console.log('Board Cells left: ', singleBoard);
+
+      if (coins === 0 || checkFullBoard(boardState) || singleBoard === 1) {
         setGameEnded(true);
-        console.log('set true: ', gameEnded);
       } else {
         setShowRerollPrompt(true);
       }
     } else {
       setShowRerollPrompt(false);
     }
-
   }
 
   const handleReroll = () => {
@@ -94,18 +90,11 @@ function App() {
       const newCoins = prevCoins -1;
       const newRndShape = newShape(Shapes, setShape, dragCoordinatesRef);
 
-      console.log(newRndShape);
-      console.log(checkGameEnd(newRndShape, boardState));
-
       if (checkGameEnd(newRndShape, boardState)) {
-        console.log('Coins left: ', newCoins);
         if (newCoins === 0) {
-          console.log('Spielende')
           setGameEnded(true);
-          console.log('set true: ', gameEnded);
           setShowRerollPrompt(false);
         } else {
-          console.log('Reroll?');
           setShowRerollPrompt(true);
         }
       } else {
@@ -144,19 +133,24 @@ function App() {
         boardCoins={boardCoins}
         boardObjects={boardObjects}
         objectsRef={objectsRef}
-      />
-      {
-        showRerollPrompt &&
-        <div className={styles.rerollPrompt}>
-          <button onClick={() => setGameEnded(true)}>Do you want to End the game?</button>
-        </div>
-      }
-      <GameEnd
-        gameEnded={gameEnded}
+        showRerollPrompt={showRerollPrompt}
         setGameEnded={setGameEnded}
-        coins={coins}
-        score={score}
       />
+      {/* {
+        showRerollPrompt &&
+          <button onClick={() => setGameEnded(true)} className={styles.rerollPrompt}>End Game?</button>
+      } */}
+      {gameEnded && (
+        <GameEnd
+          gameEnded={gameEnded}
+          setGameEnded={setGameEnded}
+          coins={coins}
+          score={score}
+          setScore={setScore}
+          boardState={boardState}
+          setShape={setShape}
+        />
+      )}
     </div>
   )
 }

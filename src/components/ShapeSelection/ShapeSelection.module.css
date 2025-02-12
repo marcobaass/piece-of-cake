@@ -1,9 +1,14 @@
 .filled {
   box-sizing: border-box;
+  display: flex;
+  /* border: 1px solid red; */
+  justify-content: center;
+  align-items: center;
   width: var(--cell-size);
   height: var(--cell-size);
-  background-color: whitesmoke;
-  border: 1px solid red;
+  background-image: url('../../assets/illus/chocolate.jpg');
+  background-position: center;
+  background-size: contain;
 }
 
 .filledShadow {

@@ -4,3 +4,10 @@
   justify-content: center;
   align-items: center;
 }
+
+.rerollPrompt {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+}
