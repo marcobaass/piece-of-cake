@@ -6,3 +6,17 @@
   border: 2px solid black;
   box-shadow: 4px 4px 8px 0px black;
 }
+
+.restartBtn {
+  display: inline-block;
+  background-color: pink;
+  border: none;
+}
+
+.restartBtn:hover {
+  display: inline-block;
+  border-style: none;
+  box-shadow: 2px 2px 4px black;
+  transform: none;
+  transform: translate(-2px, -2px);
+}

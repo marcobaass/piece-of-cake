@@ -119,13 +119,15 @@ function App() {
     setCells({});
     setBoardCoins(8);
     setBoardObjects(12);
-    setRestart(true);
+    setRestart(prev => !prev);
+    setScore(boardCoins + boardObjects - 8 * 8)
   };
 
 
 
   return (
     <div className={styles.app}>
+      <h1>piece of cake</h1>
       <PlayerUI
         coins={coins}
         setCoins={setCoins}
@@ -152,6 +154,7 @@ function App() {
         objectsRef={objectsRef}
         showRerollPrompt={showRerollPrompt}
         setGameEnded={setGameEnded}
+        restart={restart}
       />
       {/* {
         showRerollPrompt &&

@@ -1,5 +1,10 @@
+@font-face {
+  font-family: 'Eracake';
+  src: url('/public/Fonts/Eracake.ttf');
+}
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Eracake, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -32,8 +37,17 @@ body {
 }
 
 h1 {
-  font-size: 3.2em;
+  font-size: 4rem;
   line-height: 1.1;
+  margin: 2rem 0 0;
+  padding: 0;
+}
+
+h2 {
+  font-size: 1.5rem;
+  line-height: 1.1;
+  margin: 1.5rem 0 1.5;
+  padding: 0;
 }
 
 button {

@@ -10,8 +10,8 @@ export default function PlayerUI({
   return (
     <div>
       <div className={styles.playerData}>
-        <h1>💰: {coins}</h1>
-        <h1>🏆: {score}</h1>
+        <h2>🧁: {coins}</h2>
+        <h2>🍪: {score}</h2>
       </div>
 
     </div>

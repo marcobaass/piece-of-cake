@@ -21,7 +21,8 @@ export default function Board({
   boardObjects,
   objectsRef, // an array of all the objects
   setGameEnded,
-  showRerollPrompt
+  showRerollPrompt,
+  restart
 }) {
 
   // 2. Initialize board
@@ -31,7 +32,8 @@ export default function Board({
     placeItems(initialBoard, 'coin', boardCoins);   // Place 8 coins
     placeItems(initialBoard, 'object', boardObjects);// Place 12 objects
     setBoardState(initialBoard);
-  }, [boardCoins]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [restart]);
 
 
   const createFullGrid = () => {
@@ -93,7 +95,7 @@ export default function Board({
                 {cell.type === 'object'
                   ? <div className={styles.cherrys} ></div>
                   : cell.type === 'coin'
-                  ? '💰'
+                  ? '🧁'
                   : ''}
               </div>
             ))
@@ -120,7 +122,7 @@ export default function Board({
       <div className={styles.shapeButtons}>
         <button onClick={() => handleRotate(boardState)}>Rotate</button>
         <button onClick={() => handleFlip(boardState)}>Flip</button>
-        { (coins > 0) ? <button onClick={() => handleReroll()}>Reroll (1c)</button> : '' }
+        { (coins > 0) ? <button onClick={() => handleReroll()}>Reroll 🧁</button> : '' }
         {
         showRerollPrompt &&
           <button onClick={() => setGameEnded(true)}>End Game?</button>
@@ -149,5 +151,6 @@ Board.propTypes = {
   boardObjects: PropTypes.number.isRequired,
   objectsRef: PropTypes.object.isRequired,
   setGameEnded: PropTypes.func.isRequired,
-  showRerollPrompt: PropTypes.bool.isRequired
+  showRerollPrompt: PropTypes.bool.isRequired,
+  restart: PropTypes.bool.isRequired
 }
