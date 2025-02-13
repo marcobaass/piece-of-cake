@@ -33,7 +33,7 @@
 .boardCell {
   box-sizing: border-box;
   display: flex;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   justify-content: center;
   align-items: center;
   width: var(--cell-size);
@@ -41,10 +41,23 @@
   background-color: hsl(0, 59%, 21%);
 }
 
+.cherrys {
+  box-sizing: border-box;
+  display: flex;
+  /* border: 1px solid red; */
+  justify-content: center;
+  align-items: center;
+  width: var(--cell-size);
+  height: var(--cell-size);
+  background-image: url('../../assets/illus/chocolateCherryTop.png');
+  background-position: center;
+  background-size: contain;
+}
+
 .offCell {
   box-sizing: border-box;
   display: flex;
-  border: 1px solid rgb(255, 251, 0);
+  /* border: 1px solid rgb(255, 251, 0); */
   justify-content: center;
   align-items: center;
   width: var(--cell-size);

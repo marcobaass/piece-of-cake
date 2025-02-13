@@ -31,7 +31,7 @@ export default function Board({
     placeItems(initialBoard, 'coin', boardCoins);   // Place 8 coins
     placeItems(initialBoard, 'object', boardObjects);// Place 12 objects
     setBoardState(initialBoard);
-  }, []);
+  }, [boardCoins]);
 
 
   const createFullGrid = () => {
@@ -91,7 +91,7 @@ export default function Board({
               >
                 {/* Zeige das Item innerhalb der Zelle an */}
                 {cell.type === 'object'
-                  ? '📦'
+                  ? <div className={styles.cherrys} ></div>
                   : cell.type === 'coin'
                   ? '💰'
                   : ''}

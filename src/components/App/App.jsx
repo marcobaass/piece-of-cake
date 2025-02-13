@@ -12,13 +12,14 @@ import checkSurround from '../../utils/checkSurround.js';
 import { checkFullBoard } from '../../utils/checkFullBoard.js';
 
 function App() {
-  const [boardCoins] = useState(8);
-  const [boardObjects] = useState(12);
+  const [boardCoins, setBoardCoins] = useState(8);
+  const [boardObjects, setBoardObjects] = useState(12);
   const [coins, setCoins] = useState(0);
   const [score, setScore] = useState(boardCoins + boardObjects - 8 * 8);
   const [cells, setCells] = useState({})
   const [boardState, setBoardState] = useState([]);
   const [gameEnded, setGameEnded] = useState(false);
+  const [restart, setRestart] = useState(false);
   const draggingStates = useRef(false);
   const isValid = useRef(false);
   const dragCoordinatesRef = useRef({ x: 1, y: 9 });
@@ -30,6 +31,8 @@ function App() {
   const [showRerollPrompt, setShowRerollPrompt] = useState(false);
 
   const objectsRef = useRef([]);
+
+  const dialogRef = useRef(null);
 
   const handleStartDragging = () => {
     draggingStates.current = true;
@@ -105,6 +108,20 @@ function App() {
     });
   };
 
+  const handlePlayAgain = () => {
+    dialogRef.current.close();
+    setGameEnded(false);
+    setCoins(0);
+    setScore(0);
+    setCells({});
+    setBoardState([]);
+    setBoardState ([]);
+    setCells({});
+    setBoardCoins(8);
+    setBoardObjects(12);
+    setRestart(true);
+  };
+
 
 
   return (
@@ -149,6 +166,8 @@ function App() {
           setScore={setScore}
           boardState={boardState}
           setShape={setShape}
+          handlePlayAgain={handlePlayAgain}
+          dialogRef={dialogRef}
         />
       )}
     </div>

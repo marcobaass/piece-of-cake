@@ -1,0 +1,8 @@
+.dialogContainer {
+  display: grid;
+  justify-items: center;
+  border-radius: 1rem;
+  background-color: whitesmoke;
+  border: 2px solid black;
+  box-shadow: 4px 4px 8px 0px black;
+}
