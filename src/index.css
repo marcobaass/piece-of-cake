@@ -69,6 +69,20 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+.animate-surrounded {
+  animation: vanish 0.25s ease-out forwards;
+}
+
+@keyframes vanish {
+  from {
+    transform: rotate(0) scale(1);
+  }
+  to {
+    transform: rotate(2turn) scale(2);
+  }
+}
+
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

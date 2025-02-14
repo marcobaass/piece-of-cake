@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import styles from './Board.module.css';
 import ShapeSelection from '../ShapeSelection/ShapeSelection';
 import PropTypes from 'prop-types';
+import cherryImage from '../../assets/illus/cheryTransparent.png';
 
 export default function Board({
   handleStartDragging,
@@ -20,8 +21,8 @@ export default function Board({
   boardCoins,
   boardObjects,
   objectsRef, // an array of all the objects
-  setGameEnded,
-  showRerollPrompt,
+  // setGameEnded,
+  // showRerollPrompt,
   restart
 }) {
 
@@ -76,56 +77,60 @@ export default function Board({
 
   // 5. Render the board as an 8x8 grid of cells
   return (
-    <div>
-
-      <section className={styles.boardContainer}>
-
-        <div className={styles.board}>
-          {/* Rendern des Boards */}
-          {boardState.map((row, rowIndex) =>
-            row.map((cell, colIndex) => (
-              <div
-                key={`${rowIndex}-${colIndex}`}
-                className={`${rowIndex < 8 ? styles.boardCell : styles.offCell} ${styles[cell.type]} ${
-                  cell.type === 'cake' ? styles.shapeCell : ''
-                }`}
-                id={cell.id} // Jede Zelle hat nun eine eindeutige ID
-              >
-                {/* Zeige das Item innerhalb der Zelle an */}
-                {cell.type === 'object'
-                  ? <div className={styles.cherrys} ></div>
-                  : cell.type === 'coin'
-                  ? '🧁'
-                  : ''}
-              </div>
-            ))
-          )}
-        </div>
-
-        {/* ShapeSelection für die draggable Teile im OffBoard-Bereich */}
-        <div className={styles.shapeSelection}>
-            <ShapeSelection
-              shapeGrid={shape}
-              handleStartDragging={handleStartDragging}
-              handleStopDragging={handleStopDragging}
-              boardState={boardState} // Pass down boardState
-              isValid={isValid} // Pass down isValid state
-              handleConfirmPlacement={handleConfirmPlacement} // Pass down handleConfirmPlacement function
-              dragCoordinatesRef={dragCoordinatesRef} // Pass down dragCoordinatesRef state
-              setCells={setCells}
-            />
-
-        </div>
-
-      </section>
-
+    <>
       <div className={styles.shapeButtons}>
-        <button onClick={() => handleRotate(boardState)}>Rotate</button>
-        <button onClick={() => handleFlip(boardState)}>Flip</button>
-        { (coins > 0) ? <button onClick={() => handleReroll()}>Reroll 🧁</button> : '' }
+        <button onClick={() => handleRotate(boardState)} className={styles.userBtn}>turn</button>
+        <button onClick={() => handleFlip(boardState)} className={styles.userBtn}>Flip</button>
+        { (coins > 0) ? <button onClick={() => handleReroll()} className={styles.userBtn}>Reroll 🧁</button> : '' }
       </div>
 
-    </div>
+      <div>
+        <section className={styles.boardContainer}>
+
+          <div className={styles.board}>
+            {/* Rendern des Boards */}
+            {boardState.map((row, rowIndex) =>
+              row.map((cell, colIndex) => (
+                <div
+                  key={`${rowIndex}-${colIndex}`}
+                  className={`${rowIndex < 8 ? styles.boardCell : styles.offCell} ${styles[cell.type]} ${
+                    cell.type === 'cake' ? styles.shapeCell : ''
+                  }`}
+                  id={cell.id} // Jede Zelle hat nun eine eindeutige ID
+                >
+                  {/* Zeige das Item innerhalb der Zelle an */}
+                  {cell.type === 'object'
+                    ?
+                      <div className={styles.cherrys}>
+                        <img src={cherryImage} alt="Cherry" className={styles.cherryOnTop} />
+                      </div>
+
+                    : cell.type === 'coin'
+                    ? '🧁'
+                    : ''}
+                </div>
+              ))
+            )}
+          </div>
+
+          {/* ShapeSelection für die draggable Teile im OffBoard-Bereich */}
+          <div className={styles.shapeSelection}>
+              <ShapeSelection
+                shapeGrid={shape}
+                handleStartDragging={handleStartDragging}
+                handleStopDragging={handleStopDragging}
+                boardState={boardState} // Pass down boardState
+                isValid={isValid} // Pass down isValid state
+                handleConfirmPlacement={handleConfirmPlacement} // Pass down handleConfirmPlacement function
+                dragCoordinatesRef={dragCoordinatesRef} // Pass down dragCoordinatesRef state
+                setCells={setCells}
+              />
+
+          </div>
+
+        </section>
+      </div>
+    </>
   );
 }
 

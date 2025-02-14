@@ -23,12 +23,28 @@
 }
 
 .shapeButtons {
-  margin-top: 1rem;
+  margin-bottom: 1rem;
   display: flex;
-  flex-direction: column;
+  flex: 1;
+  min-width: fit-content;
   justify-content: center;
-  gap: 10px;
+  gap: 1rem;
 }
+
+.userBtn {
+  display: inline-block;
+  background-color: white;
+  border: none;
+}
+
+.userBtn:hover {
+  display: inline-block;
+  border-style: none;
+  box-shadow: 2px 2px 4px black;
+  transform: none;
+  transform: translate(-2px, -2px);
+}
+
 
 .boardCell {
   box-sizing: border-box;
@@ -49,7 +65,7 @@
   align-items: center;
   width: var(--cell-size);
   height: var(--cell-size);
-  background-image: url('../../assets/illus/chocolateCherryTop.png');
+  background-image: url('../../assets/illus/chocolate.jpg');
   background-position: center;
   background-size: contain;
 }
@@ -75,4 +91,11 @@
   background-image: url('../../assets/illus/chocolate.jpg');
   background-position: center;
   background-size: contain;
+}
+
+.cherryOnTop{
+  width: 75%;
+  height: 75%;
+  object-fit: cover;
+  object-position: center;
 }

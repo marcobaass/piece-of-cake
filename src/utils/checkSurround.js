@@ -37,6 +37,19 @@ export default function checkSurround(newBoardState, objectsRef, scoreBeforeSurr
   }
 
   if (objectsToRemove.length > 0) {
+    objectsToRemove.forEach(id => {
+      const container = document.getElementById(id);
+      if (container) {
+        const imgElement = container.querySelector('img');
+        if (imgElement) {
+          imgElement.classList.add('animate-surrounded');
+          setTimeout(() => {
+            imgElement.classList.remove('animate-surrounded');
+          }, 500);
+        }
+      }
+    });
+
     objectsRef.current = objectsRef.current.filter(obj => !objectsToRemove.includes(obj.id));
 
     const coinsToAdd = objectsToRemove.length * coins;
