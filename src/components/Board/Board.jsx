@@ -123,10 +123,6 @@ export default function Board({
         <button onClick={() => handleRotate(boardState)}>Rotate</button>
         <button onClick={() => handleFlip(boardState)}>Flip</button>
         { (coins > 0) ? <button onClick={() => handleReroll()}>Reroll 🧁</button> : '' }
-        {
-        showRerollPrompt &&
-          <button onClick={() => setGameEnded(true)}>End Game?</button>
-      }
       </div>
 
     </div>

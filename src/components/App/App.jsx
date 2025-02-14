@@ -16,7 +16,7 @@ function App() {
   const [boardObjects, setBoardObjects] = useState(12);
   const [coins, setCoins] = useState(0);
   const [score, setScore] = useState(boardCoins + boardObjects - 8 * 8);
-  const [cells, setCells] = useState({})
+  const [, setCells] = useState({})
   const [boardState, setBoardState] = useState([]);
   const [gameEnded, setGameEnded] = useState(false);
   const [restart, setRestart] = useState(false);
@@ -121,6 +121,8 @@ function App() {
     setBoardObjects(12);
     setRestart(prev => !prev);
     setScore(boardCoins + boardObjects - 8 * 8)
+    const newShapeKey = shapeForms[Math.floor(Math.random() * shapeForms.length)];
+    setShape(Shapes[newShapeKey]);
   };
 
 
