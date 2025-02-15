@@ -3,6 +3,7 @@ import styles from './Board.module.css';
 import ShapeSelection from '../ShapeSelection/ShapeSelection';
 import PropTypes from 'prop-types';
 import cherryImage from '../../assets/illus/cheryTransparent.png';
+import checkGameEnd from '../../utils/checkGameEnd';
 
 export default function Board({
   handleStartDragging,
@@ -79,9 +80,10 @@ export default function Board({
   return (
     <>
       <div className={styles.shapeButtons}>
-        <button onClick={() => handleRotate(boardState)} className={styles.userBtn}>turn</button>
+        <button onClick={() => handleRotate(boardState)} className={styles.userBtn}>rotate</button>
         <button onClick={() => handleFlip(boardState)} className={styles.userBtn}>Flip</button>
-        { (coins > 0) ? <button onClick={() => handleReroll()} className={styles.userBtn}>Reroll 🧁</button> : '' }
+        { (coins > 0 && checkGameEnd(shape, boardState)) ? <button onClick={() => handleReroll()} className={styles.userPromptBtn}>Reroll 🧁</button> : '' }
+        { (coins > 0 && !checkGameEnd(shape, boardState)) ? <button onClick={() => handleReroll()} className={styles.userBtn}>Reroll 🧁</button> : '' }
       </div>
 
       <div>

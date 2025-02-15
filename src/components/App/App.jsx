@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import styles from './App.module.css'
 import Board from '../Board/Board.jsx';
 import PlayerUI from '../PlayerUI/PlayerUI';
@@ -20,6 +20,7 @@ function App() {
   const [boardState, setBoardState] = useState([]);
   const [gameEnded, setGameEnded] = useState(false);
   const [restart, setRestart] = useState(false);
+  const [displayedScore, setDisplayedScore] = useState(score)
   const draggingStates = useRef(false);
   const isValid = useRef(false);
   const dragCoordinatesRef = useRef({ x: 1, y: 9 });
@@ -37,6 +38,16 @@ function App() {
   const handleStartDragging = () => {
     draggingStates.current = true;
   };
+
+  useEffect(() => {
+    // debugger;
+    if (displayedScore < score) {
+      setTimeout(() => {
+        setDisplayedScore(prevDisplayedScore => prevDisplayedScore +1);
+      }, 50);
+    }
+  }, [displayedScore, score])
+
 
   // Handler for stopping the drag (for a specific shape index)
   const handleStopDragging = (x, y, rndShape, boardState) => {
@@ -123,6 +134,7 @@ function App() {
     setScore(boardCoins + boardObjects - 8 * 8)
     const newShapeKey = shapeForms[Math.floor(Math.random() * shapeForms.length)];
     setShape(Shapes[newShapeKey]);
+    setDisplayedScore(boardCoins + boardObjects - 8 * 8);
   };
 
 
@@ -133,7 +145,7 @@ function App() {
       <PlayerUI
         coins={coins}
         setCoins={setCoins}
-        score={score}
+        score={displayedScore}
         setScore={setScore}
       />
       <Board
