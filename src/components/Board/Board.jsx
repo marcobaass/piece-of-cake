@@ -82,8 +82,14 @@ export default function Board({
       <div className={styles.shapeButtons}>
         <button onClick={() => handleRotate(boardState)} className={styles.userBtn}>rotate</button>
         <button onClick={() => handleFlip(boardState)} className={styles.userBtn}>Flip</button>
-        { (coins > 0 && checkGameEnd(shape, boardState)) ? <button onClick={() => handleReroll()} className={styles.userPromptBtn}>Reroll 🧁</button> : '' }
-        { (coins > 0 && !checkGameEnd(shape, boardState)) ? <button onClick={() => handleReroll()} className={styles.userBtn}>Reroll 🧁</button> : '' }
+        {coins > 0 && (
+          <button
+            onClick={() => handleReroll()}
+            className={checkGameEnd(shape, boardState) ? styles.userPromptBtn : styles.userBtn}
+          >
+            Reroll 🧁
+          </button>
+        )}
       </div>
 
       <div>
