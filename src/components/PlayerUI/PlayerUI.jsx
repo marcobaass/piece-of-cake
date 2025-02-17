@@ -70,7 +70,7 @@ export default function PlayerUI({
                 rulesRef.current.close();
                 handleCloseModal();
               }}
-              >Close
+              ><p>Close</p>
             </button>
           </article>
         </dialog>

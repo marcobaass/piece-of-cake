@@ -80,8 +80,8 @@ export default function Board({
   return (
     <>
       <div className={styles.shapeButtons}>
-        <button onClick={() => handleRotate(boardState)} className={styles.userBtn}>rotate</button>
-        <button onClick={() => handleFlip(boardState)} className={styles.userBtn}>Flip</button>
+        <button onClick={() => handleRotate(boardState)} className={styles.userBtn}> <p>rotate</p> </button>
+        <button onClick={() => handleFlip(boardState)} className={styles.userBtn}><p>Flip</p></button>
         {coins > 0 && (
           <button
             onClick={() => handleReroll()}
