@@ -33,7 +33,7 @@ export default function PlayerUI({
             onClick={handleModal}
             className={styles.rulesBtn}
           >
-            rules
+            <p>rules</p>
           </button>
           <h2>🍪: {score}</h2>
         </div>

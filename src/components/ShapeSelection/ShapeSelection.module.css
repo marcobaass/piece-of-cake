@@ -33,14 +33,14 @@
 button.valid {
   margin-top: 0.25rem;
   border-radius: 100%;
-  font-size: 0.825rem;
+  font-size: 1.5rem;
   padding: 0.1rem 0.35rem;
   color: green;
 }
 
 .invalid {
   display: inline-block;
-  font-size: 0.825rem;
+  font-size: 1.5rem;
   padding: 0.1rem;
   margin-top: 0.25rem;
   color: red;
