@@ -5,8 +5,6 @@ import styles from './GameEnd.module.css'
 
 export default function GameEnd({gameEnded, coins, score, boardState, setScore, handlePlayAgain, dialogRef}) {
 
-  console.log('Score und Coins in GameEnd' ,score, coins)
-
   useEffect(() => {
     if (gameEnded && dialogRef.current) {
       // Zeigt das Dialog-Modal an
@@ -19,7 +17,6 @@ export default function GameEnd({gameEnded, coins, score, boardState, setScore, 
     if (checkFullBoard(boardState)) {
       let newScore = score + coins;
       newScore += Math.floor(newScore * 0.1);
-      console.log('New Score + 10% in useEffe', newScore);
       setScore(newScore);
     } else {
       let newScore = score + coins;

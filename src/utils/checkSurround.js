@@ -1,4 +1,4 @@
-export default function checkSurround(newBoardState, objectsRef, scoreBeforeSurround, setScore, coins, newRndShape, setShape) {
+export default function checkSurround(newBoardState, objectsRef, scoreBeforeSurround, setScore, coins, collectedCoins, newRndShape, setShape) {
   const flatBoardState = newBoardState.flat();
   const objectsToRemove = [];
   // const updateScore = (coinsToAdd, newRndShape, setShape) => {
@@ -52,7 +52,8 @@ export default function checkSurround(newBoardState, objectsRef, scoreBeforeSurr
 
     objectsRef.current = objectsRef.current.filter(obj => !objectsToRemove.includes(obj.id));
 
-    const coinsToAdd = objectsToRemove.length * coins;
+    const coinsToAdd = objectsToRemove.length * (coins + collectedCoins);
+    console.log('checkSurround - 56 // coinsToAdd: ' + coinsToAdd)
     // updateScore(coinsToAdd, newRndShape, setShape);
     setScore(prev => prev + coinsToAdd);
     setShape([[1]]);

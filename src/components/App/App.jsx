@@ -72,8 +72,10 @@ function App() {
 
   const handleConfirmPlacement = (x, y, rndShape, boardState) => {
     const [collectedCoins, collectedPoints] = placeTile(x, y, rndShape, boardState);
+    console.log('collectedPoints: ', collectedPoints, 'collectedCoins: ', collectedCoins);
     setCoins(prevCoins => prevCoins + collectedCoins);
     const scoreBeforeSurround = score + collectedPoints;
+    console.log('scoreBeforeSurround: ', scoreBeforeSurround);
     setScore(prevScore => prevScore + collectedPoints);
     const newBoardstate = updateBoard(x, y, rndShape, boardState);
     setBoardState(newBoardstate);
@@ -81,13 +83,11 @@ function App() {
 
     isValid.current = false;
 
-    newRndShape = checkSurround(newBoardstate, objectsRef, scoreBeforeSurround, setScore, coins, newRndShape, setShape);
+    newRndShape = checkSurround(newBoardstate, objectsRef, scoreBeforeSurround, setScore, coins, collectedCoins, newRndShape, setShape);
 
     if (checkGameEnd(newRndShape, newBoardstate)) {
       // check if exact one board left
       const singleBoard = newBoardstate.flat().filter(cell => cell.type === 'board').length;
-
-      console.log('Board Cells left: ', singleBoard);
 
       if (coins === 0 || checkFullBoard(boardState) || singleBoard === 1) {
         setGameEnded(true);
