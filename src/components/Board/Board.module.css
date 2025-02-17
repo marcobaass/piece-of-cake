@@ -12,6 +12,10 @@
   grid-template-columns: repeat(8, var(--cell-size));
 }
 
+.cupCakes {
+  font-size: clamp(1.125rem, 0.8618rem + 1.3158vw, 1.75rem);
+}
+
 .shapeSelection {
   position: absolute;
   max-width: calc(var(--cell-size) * 8);
@@ -29,18 +33,22 @@
   min-width: fit-content;
   justify-content: center;
   gap: 1rem;
+  transition: 50ms ease-in-out;
 }
 
 .userBtn {
   display: inline-block;
   background-color: white;
   border: none;
+  transition: 50ms ease-in-out;
 }
 
 .userPromptBtn {
   box-sizing: border-box;
   display: inline-block;
   background-color: red;
+  transition: 50ms ease-in-out;
+  border: none;
 }
 
 .userBtn:hover,

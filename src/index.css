@@ -72,7 +72,7 @@ button:focus-visible {
 }
 
 .animate-surrounded {
-  animation: vanish 0.25s ease-out forwards;
+  animation: vanish 0.25s ease-in-out forwards;
 }
 
 @keyframes vanish {
@@ -145,4 +145,3 @@ button:focus-visible {
     --cell-size: 32px;
   }
 }
-

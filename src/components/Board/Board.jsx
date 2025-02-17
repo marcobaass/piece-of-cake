@@ -114,7 +114,10 @@ export default function Board({
                       </div>
 
                     : cell.type === 'coin'
-                    ? '🧁'
+                    ? <div className={styles.cupCakes}>
+                      🧁
+                      </div>
+
                     : ''}
                 </div>
               ))

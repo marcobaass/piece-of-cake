@@ -11,6 +11,7 @@
   display: inline-block;
   background-color: pink;
   border: none;
+  transition: 50ms ease-in-out;
 }
 
 .restartBtn:hover {

@@ -1,7 +1,7 @@
 .playerData {
   display: flex;
   justify-content: space-around;
-  gap: 2rem;
+  gap: clamp(1rem, 0.5789rem + 2.1053vw, 2rem);
   align-items: center;
 }
 
@@ -15,6 +15,7 @@
 .rulesBtn {
   background-color: aqua;
   border: solid 1px black;
+  transition: 50ms ease-in-out;
 }
 
 .rulesBtn:hover {
