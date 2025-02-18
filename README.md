@@ -1,3 +1,5 @@
+![image](https://github.com/user-attachments/assets/64c4648f-8216-4af8-b579-01e88f1c92b1)
+
 # Piece of Cake
 
 **Piece of Cake** is a fun puzzle game where your mission is to earn as many 🍪 as possible by strategically placing pieces of cake on a baking tray. Get ready to mix, bake, and challenge yourself as you collect cupcakes 🧁 and conquer the board!
