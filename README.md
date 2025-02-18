@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/64c4648f-8216-4af8-b579-01e88f1c92b1" alt="Screenshot" width="600">
+  <img src="https://github.com/user-attachments/assets/64c4648f-8216-4af8-b579-01e88f1c92b1" alt="Screenshot" width="200">
 </p>
 
 # Piece of Cake
