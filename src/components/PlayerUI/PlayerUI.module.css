@@ -42,3 +42,7 @@
   overflow: auto;
 
 }
+
+.rulesContent > p {
+  margin-bottom: 1rem;
+}
