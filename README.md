@@ -1,4 +1,6 @@
-![image](https://github.com/user-attachments/assets/64c4648f-8216-4af8-b579-01e88f1c92b1)
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/64c4648f-8216-4af8-b579-01e88f1c92b1" alt="Screenshot" width="600">
+</p>
 
 # Piece of Cake
 
@@ -83,3 +85,5 @@ In **Piece of Cake**, you’ll receive random cake pieces (polynominol shapes) t
   Contributions are welcome! If you have ideas for new features or improvements, please open an issue or submit a pull request.
 
 ## Game Design & Development: Marco Baaß
+
+![image](https://github.com/user-attachments/assets/64c4648f-8216-4af8-b579-01e88f1c92b1)
