@@ -31,8 +31,8 @@
 }
 
 button.valid {
-  width: var(--cell-size);
-  height: var(--cell-size);
+  width: calc(var(--cell-size)-1px);
+  height: calc(var(--cell-size)-1px);
   margin-top: 0.25rem;
   border-radius: 100%;
   font-size: calc(var(--cell-size)/1.5);
@@ -42,8 +42,8 @@ button.valid {
 }
 
 .invalid {
-  width: var(--cell-size);
-  height: var(--cell-size);
+  width: calc(var(--cell-size)-1px);
+  height: calc(var(--cell-size)-1px);
   display: inline-block;
   font-size: calc(var(--cell-size)/1.5);
   padding: 0.1rem;
