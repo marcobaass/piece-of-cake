@@ -28,7 +28,6 @@ export default function ShapeSelection({
       nodeRef={nodeRef}
       grid={[cellSize(), cellSize()]}
       bounds="section"
-      cancel=".confirmBtn"
       // defaultPosition={{x: cellSize(), y: cellSize()*9}}
       position={{
         x: dragCoordinatesRef.current.x * cellSize(),
@@ -69,7 +68,7 @@ export default function ShapeSelection({
         <div>
           { isValid.current ? (
             <button
-              className={`${styles.valid} confirmBtn`}
+              className={styles.valid}
 
               onClick={() => handleConfirmPlacement(
                 dragCoordinatesRef.current.x,

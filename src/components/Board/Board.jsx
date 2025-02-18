@@ -87,7 +87,7 @@ export default function Board({
             onClick={() => handleReroll()}
             className={checkGameEnd(shape, boardState) ? styles.userPromptBtn : styles.userBtn}
           >
-            Reroll 🧁
+            <p>Reroll 🧁</p>
           </button>
         )}
       </div>
