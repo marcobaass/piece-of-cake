@@ -66,11 +66,10 @@ export default function ShapeSelection({
           ))}
         </div>
 
-        <div>
+        <button className={`${styles.placeBtn} confirmBtn`}>
           { isValid.current ? (
-            <button
-              className={`${styles.valid} confirmBtn`}
-
+            <span
+              className={styles.valid}
               onClick={() => handleConfirmPlacement(
                 dragCoordinatesRef.current.x,
                 dragCoordinatesRef.current.y,
@@ -78,11 +77,11 @@ export default function ShapeSelection({
                 boardState
               )}>
               ✔
-              </button>
+            </span>
           ) : (
-            <div className={styles.invalid}>❌</div>
+            <span className={styles.invalid}>❌</span>
           )}
-        </div>
+        </button>
 
       </div>
     </Draggable>
