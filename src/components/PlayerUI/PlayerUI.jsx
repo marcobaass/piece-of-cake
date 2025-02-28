@@ -56,7 +56,7 @@ export default function PlayerUI({
             </p>
             <p>
               Placing over 🧁 adds them to your stash. But they aren't just for decoration!
-              You earn bonus points based on the number of 🧁 in your stash, when encircle a cherry.
+              You earn bonus points based on the number of 🧁 in your stash, when encircle a cherry. When you surround even more than one cherry at the same time, you get additional bonus points that may escalate youre score 🤡.
               You can also spend a 🧁 to reroll for a new, random cake piece.
               But be careful: surrounding a cherry piece gives you extra points depending on how many 🧁 you still have, and at the end of the game, every leftover 🧁 adds even more bonus points to your final score.
             </p>

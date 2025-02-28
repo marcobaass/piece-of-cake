@@ -20,7 +20,7 @@ In **Piece of Cake**, you’ll receive random cake pieces (polynominol shapes) t
 
 - **Cupcake Power:**
   Placing a piece over 🧁 adds them to your stash.
-  - You earn bonus points based on the number of 🧁 in your reserve when you surround a cherry piece.
+  - You earn bonus points based on the number of 🧁 in your reserve when you surround a cherry piece. When you surround even more than one cherry at the same time, you get additional bonus points that may escalate youre score 🤡.
   - You can also spend a 🧁 to reroll for a new, random cake piece.
   - At the end of the game, any leftover 🧁 add even more bonus points to your final score.
 
