@@ -48,7 +48,6 @@ function App() {
     }
   }, [displayedScore, score])
 
-
   // Handler for stopping the drag (for a specific shape index)
   const handleStopDragging = (x, y, rndShape, boardState) => {
     draggingStates.current = false;
@@ -63,6 +62,20 @@ function App() {
     isValid.current = check;
   };
 
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'r' || e.key === 'R') {
+        handleRotate(boardState)
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [handleRotate, boardState])
+
   const handleFlip = (boardState) => {
     const flippedShape = flipHorizontal(shape);
     setShape(flippedShape);
@@ -70,12 +83,24 @@ function App() {
     isValid.current = check;
   };
 
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'f' || e.key === 'F') {
+        handleFlip(boardState)
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [handleFlip, boardState])
+
   const handleConfirmPlacement = (x, y, rndShape, boardState) => {
     const [collectedCoins, collectedPoints] = placeTile(x, y, rndShape, boardState);
-    console.log('collectedPoints: ', collectedPoints, 'collectedCoins: ', collectedCoins);
     setCoins(prevCoins => prevCoins + collectedCoins);
     const scoreBeforeSurround = score + collectedPoints;
-    console.log('scoreBeforeSurround: ', scoreBeforeSurround);
     setScore(prevScore => prevScore + collectedPoints);
     const newBoardstate = updateBoard(x, y, rndShape, boardState);
     setBoardState(newBoardstate);

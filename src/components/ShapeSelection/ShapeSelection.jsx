@@ -19,7 +19,6 @@ export default function ShapeSelection({
 
   const cellSize = () => {
     const cellSizeStr = getComputedStyle(document.documentElement).getPropertyValue('--cell-size').trim();
-    console.log(cellSizeStr);
     return parseInt(cellSizeStr, 10);
   }
 
